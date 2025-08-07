@@ -1,1 +1,90 @@
-
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beijing Travel Checklist</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 1em;
+      max-width: 700px;
+      margin: auto;
+      background: #fefefe;
+    }
+    h1 {
+      text-align: center;
+    }
+    details {
+      margin-bottom: 1em;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 0.5em;
+      background: #f9f9f9;
+    }
+    summary {
+      font-weight: bold;
+      font-size: 1.2em;
+      cursor: pointer;
+    }
+    label {
+      display: block;
+      margin: 0.5em 0;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Beijing Travel Checklist</h1>  <details>
+    <summary>1. The Forbidden City (故宫)</summary>
+    <p>Explore the largest ancient imperial palace in the world. Imagine you're an emperor walking through the red walls and golden roofs.</p>
+    <label><input type="checkbox" data-id="forbidden-1"> Enter through the Meridian Gate (午门)</label>
+    <label><input type="checkbox" data-id="forbidden-2"> Find a dragon decoration (hint: look up!)</label>
+    <label><input type="checkbox" data-id="forbidden-3"> Take a photo in front of the Hall of Supreme Harmony</label>
+    <label><input type="checkbox" data-id="forbidden-4"> Find the characters “故宫博物院” and learn how to say them</label>
+  </details>  <details>
+    <summary>2. Temple of Heaven (天坛)</summary>
+    <p>Ancient emperors prayed here for good harvests. The architecture is full of cosmic symbols.</p>
+    <label><input type="checkbox" data-id="temple-1"> Clap your hands in the Echo Wall area</label>
+    <label><input type="checkbox" data-id="temple-2"> Find the Hall of Prayer for Good Harvests</label>
+    <label><input type="checkbox" data-id="temple-3"> Observe local people dancing or doing tai chi</label>
+    <label><input type="checkbox" data-id="temple-4"> Try saying “Tiāntán” in Chinese!</label>
+  </details>  <details>
+    <summary>3. Great Wall (长城)</summary>
+    <p>One of the Seven Wonders of the World. It’s said that "You're not a true hero until you climb the Great Wall."</p>
+    <label><input type="checkbox" data-id="wall-1"> Climb at least 100 steps</label>
+    <label><input type="checkbox" data-id="wall-2"> Take a panorama photo from a watchtower</label>
+    <label><input type="checkbox" data-id="wall-3"> Look for the phrase “不到长城非好汉” and learn what it means</label>
+    <label><input type="checkbox" data-id="wall-4"> High five someone who made it to the top</label>
+  </details>  <details>
+    <summary>4. Hutongs (胡同) and Local Life</summary>
+    <p>These narrow alleys are full of Beijing’s traditional life and hidden gems.</p>
+    <label><input type="checkbox" data-id="hutong-1"> Visit a local courtyard (四合院)</label>
+    <label><input type="checkbox" data-id="hutong-2"> Talk to a local or say “你好！”</label>
+    <label><input type="checkbox" data-id="hutong-3"> Try a rickshaw ride</label>
+    <label><input type="checkbox" data-id="hutong-4"> Find a door with red lanterns</label>
+  </details>  <details>
+    <summary>5. Food Adventure</summary>
+    <p>Beijing food is full of history, flavor, and surprises!</p>
+    <label><input type="checkbox" data-id="food-1"> Eat Peking Duck 🦆</label>
+    <label><input type="checkbox" data-id="food-2"> Try jianbing (煎饼) or baozi (包子)</label>
+    <label><input type="checkbox" data-id="food-3"> Drink hot soy milk or sour plum soup</label>
+    <label><input type="checkbox" data-id="food-4"> Learn to use chopsticks like a local</label>
+  </details>  <details>
+    <summary>🎯 Bonus: Cultural Bingo</summary>
+    <p>Try to complete at least 3 of these!</p>
+    <label><input type="checkbox" data-id="bonus-1"> See someone doing calligraphy</label>
+    <label><input type="checkbox" data-id="bonus-2"> Hear a Beijing accent</label>
+    <label><input type="checkbox" data-id="bonus-3"> Watch a street performance</label>
+    <label><input type="checkbox" data-id="bonus-4"> Spot a lion statue</label>
+    <label><input type="checkbox" data-id="bonus-5"> Use WeChat Pay</label>
+    <label><input type="checkbox" data-id="bonus-6"> Learn how to say “thank you” in Chinese</label>
+  </details>  <script>
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      const id = cb.dataset.id;
+      cb.checked = localStorage.getItem(id) === 'true';
+      cb.addEventListener('change', () => {
+        localStorage.setItem(id, cb.checked);
+      });
+    });
+  </script></body>
+</html>
