@@ -1,0 +1,85 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>China Travel Checklist</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 1em;
+      max-width: 750px;
+      margin: auto;
+      background: #f9f9f9;
+    }
+    h1 {
+      text-align: center;
+    }
+    details {
+      margin-bottom: 1em;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 0.5em;
+      background: #fff;
+    }
+    summary {
+      font-weight: bold;
+      font-size: 1.2em;
+      cursor: pointer;
+    }
+    label {
+      display: block;
+      margin: 0.5em 0;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>China Travel Adventure Checklist 🇨🇳</h1>  <details>
+    <summary>📍 Beijing</summary>
+    <label><input type="checkbox" data-id="bj-1"> Walk through the Forbidden City (故宫)</label>
+    <label><input type="checkbox" data-id="bj-2"> Climb the Great Wall (长城)</label>
+    <label><input type="checkbox" data-id="bj-3"> Eat Peking Duck (北京烤鸭)</label>
+    <label><input type="checkbox" data-id="bj-4"> Visit the Temple of Heaven (天坛)</label>
+    <label><input type="checkbox" data-id="bj-5"> Explore the hutongs and talk to a local</label>
+  </details>  <details>
+    <summary>📍 Shanghai</summary>
+    <label><input type="checkbox" data-id="sh-1"> View the skyline from the Bund (外滩)</label>
+    <label><input type="checkbox" data-id="sh-2"> Ride the Maglev train</label>
+    <label><input type="checkbox" data-id="sh-3"> Visit Yu Garden (豫园)</label>
+    <label><input type="checkbox" data-id="sh-4"> Try xiaolongbao (小笼包)</label>
+    <label><input type="checkbox" data-id="sh-5"> Walk through Nanjing Road (南京路)</label>
+  </details>  <details>
+    <summary>📍 Xi'an</summary>
+    <label><input type="checkbox" data-id="xa-1"> See the Terracotta Army (兵马俑)</label>
+    <label><input type="checkbox" data-id="xa-2"> Bike on the Ancient City Wall</label>
+    <label><input type="checkbox" data-id="xa-3"> Eat hand-pulled noodles (biang biang 面)</label>
+    <label><input type="checkbox" data-id="xa-4"> Visit the Muslim Quarter</label>
+  </details>  <details>
+    <summary>📍 Chengdu</summary>
+    <label><input type="checkbox" data-id="cd-1"> Visit the Panda Research Base 🐼</label>
+    <label><input type="checkbox" data-id="cd-2"> Eat hotpot (火锅)</label>
+    <label><input type="checkbox" data-id="cd-3"> Watch Sichuan opera face-changing show</label>
+    <label><input type="checkbox" data-id="cd-4"> Relax in a teahouse</label>
+  </details>  <details>
+    <summary>📍 Guilin & Yangshuo</summary>
+    <label><input type="checkbox" data-id="gl-1"> Take a boat ride on the Li River</label>
+    <label><input type="checkbox" data-id="gl-2"> See the karst mountains</label>
+    <label><input type="checkbox" data-id="gl-3"> Ride a bike through rice fields</label>
+    <label><input type="checkbox" data-id="gl-4"> Watch the Impression Liu Sanjie show</label>
+  </details>  <details>
+    <summary>📍 Bonus Culture Challenges 🎯</summary>
+    <label><input type="checkbox" data-id="bonus-1"> Use chopsticks to finish a full meal</label>
+    <label><input type="checkbox" data-id="bonus-2"> Say "谢谢" (thank you) to a local</label>
+    <label><input type="checkbox" data-id="bonus-3"> Pay with WeChat or Alipay</label>
+    <label><input type="checkbox" data-id="bonus-4"> Try a Chinese calligraphy brush</label>
+    <label><input type="checkbox" data-id="bonus-5"> Learn to say "hello" in at least 3 dialects</label>
+  </details>  <script>
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      const id = cb.dataset.id;
+      cb.checked = localStorage.getItem(id) === 'true';
+      cb.addEventListener('change', () => {
+        localStorage.setItem(id, cb.checked);
+      });
+    });
+  </script></body>
+</html>
