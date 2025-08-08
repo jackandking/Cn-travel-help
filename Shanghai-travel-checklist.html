@@ -1,0 +1,41 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shanghai Travel Checklist</title>
+  <style>
+    body { font-family: sans-serif; padding: 1em; max-width: 700px; margin: auto; }
+    h1 { color: #0077aa; }
+    label { display: block; margin-bottom: 0.5em; }
+    input[type="checkbox"] { margin-right: 0.5em; }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+        const id = checkbox.id;
+        checkbox.checked = localStorage.getItem(id) === 'true';
+        checkbox.addEventListener('change', () => {
+          localStorage.setItem(id, checkbox.checked);
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <h1>🧳 Shanghai Travel Checklist</h1>
+  <p>Tick the boxes as you explore Shanghai's top attractions!</p>  <h2>🏙️ Iconic Attractions</h2>
+  <label><input type="checkbox" id="bund">The Bund (Waitan)</label>
+  <label><input type="checkbox" id="shanghaiTower">Shanghai Tower</label>
+  <label><input type="checkbox" id="orientalPearl">Oriental Pearl Tower</label>
+  <label><input type="checkbox" id="nanjingRoad">Nanjing Road Walking Street</label>
+  <label><input type="checkbox" id="yuyuanGarden">Yu Garden (Yuyuan)</label>  <h2>🖼️ Museums & Culture</h2>
+  <label><input type="checkbox" id="shanghaiMuseum">Shanghai Museum</label>
+  <label><input type="checkbox" id="urbanPlanning">Urban Planning Exhibition Hall</label>  <h2>🌆 Neighborhoods</h2>
+  <label><input type="checkbox" id="xintiandi">Xintiandi</label>
+  <label><input type="checkbox" id="tianzifang">Tianzifang Art Street</label>
+  <label><input type="checkbox" id="frenchConcession">Former French Concession</label>  <h2>🍜 Local Experiences</h2>
+  <label><input type="checkbox" id="dumplings">Eat soup dumplings (Xiaolongbao)</label>
+  <label><input type="checkbox" id="huangpuCruise">Huangpu River Cruise</label>
+  <label><input type="checkbox" id="maglev">Take the Maglev train</label>  <p><a href="index.html">⬅️ Back to Home</a></p>
+</body>
+</html>
