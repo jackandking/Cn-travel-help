@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xi'an Travel Checklist</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 1em;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      margin-bottom: 0.5em;
+    }
+    nav {
+      margin-bottom: 2em;
+    }
+    nav a {
+      display: inline-block;
+      margin-right: 1em;
+      text-decoration: none;
+      color: #0366d6;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    ul {
+      margin-bottom: 2em;
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      margin-bottom: 0.7em;
+    }
+    label {
+      cursor: pointer;
+      margin-left: 0.5em;
+    }
+    #saveBtn {
+      padding: 0.5em 1em;
+      background: #0366d6;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 1em;
+    }
+    #saveBtn:active {
+      background: #024e9a;
+    }
+  </style>
+</head>
+<body>
+  <h1>Xi'an Travel Checklist</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="China-travel-checklist.html">China Travel Checklist</a>
+    <a href="Beijing-travel-checklist.html">Beijing Travel Checklist</a>
+    <a href="Shanghai-travel-checklist.html">Shanghai Travel Checklist</a>
+    <a href="Cambridge-kid-checklist.html">Cambridge Kid Checklist</a>
+  </nav>
+  <p>This checklist will help you prepare for your trip to Xi'an, China.</p>
+  <button id="saveBtn" onclick="saveChecklist()">Save Progress</button>
+  <ul id="checklist">
+    <li><input type="checkbox" id="passport"><label for="passport">Passport and visa for China</label></li>
+    <li><input type="checkbox" id="flight"><label for="flight">Flight tickets to Xi'an (XIY)</label></li>
+    <li><input type="checkbox" id="accommodation"><label for="accommodation">Accommodation booking (hotel or Airbnb)</label></li>
+    <li><input type="checkbox" id="transport"><label for="transport">Local transportation (subway card, taxi apps, or shuttle)</label></li>
+    <li><input type="checkbox" id="apps"><label for="apps">Download translation and map apps (e.g., Baidu Maps, Google Translate)</label></li>
+    <li><input type="checkbox" id="cash"><label for="cash">Cash (RMB) and bank cards (ensure international access)</label></li>
+    <li><input type="checkbox" id="insurance"><label for="insurance">Emergency contacts and travel insurance</label></li>
+    <li><input type="checkbox" id="terracotta"><label for="terracotta">Tickets for Terracotta Army Museum</label></li>
+    <li><input type="checkbox" id="sites"><label for="sites">Plan visits to: Ancient City Wall, Muslim Quarter, Big Wild Goose Pagoda, Shaanxi History Museum</label></li>
+    <li><input type="checkbox" id="clothing"><label for="clothing">Weather-appropriate clothing and comfortable shoes</label></li>
+    <li><input type="checkbox" id="adapter"><label for="adapter">Power adapter for China (Type A, C, or I)</label></li>
+    <li><input type="checkbox" id="snacks"><label for="snacks">Snacks and water bottle for day trips</label></li>
+    <li><input type="checkbox" id="health"><label for="health">Health items: masks, hand sanitizer, medicine</label></li>
+    <li><input type="checkbox" id="idcopies"><label for="idcopies">Personal identification and copies</label></li>
+    <li><input type="checkbox" id="sim"><label for="sim">Local SIM card or international roaming plan</label></li>
+    <li><input type="checkbox" id="camera"><label for="camera">Camera/phone and chargers</label></li>
+  </ul>
+  <p>Safe travels and enjoy your adventure in Xi'an!</p>
+  <script>
+    // Restore checklist state from localStorage
+    window.onload = function() {
+      const saved = JSON.parse(localStorage.getItem('xianChecklist') || '{}');
+      for (const id in saved) {
+        const checkbox = document.getElementById(id);
+        if (checkbox) checkbox.checked = saved[id];
+      }
+    };
+
+    // Save checklist state to localStorage
+    function saveChecklist() {
+      const ids = [
+        'passport', 'flight', 'accommodation', 'transport', 'apps', 'cash',
+        'insurance', 'terracotta', 'sites', 'clothing', 'adapter', 'snacks',
+        'health', 'idcopies', 'sim', 'camera'
+      ];
+      const state = {};
+      ids.forEach(id => {
+        const checkbox = document.getElementById(id);
+        if (checkbox) state[id] = checkbox.checked;
+      });
+      localStorage.setItem('xianChecklist', JSON.stringify(state));
+      alert('Checklist progress saved locally!');
+    }
+  </script>
+</body>
+</html>
