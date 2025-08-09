@@ -1,101 +1,495 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>China Travel Checklist</title>
+  <title>Ultimate China Travel Adventure Checklist - Complete Guide</title>
+  <meta name="description" content="Comprehensive interactive travel checklist for China covering Beijing, Shanghai, Xi'an, Chengdu, Guilin, and cultural experiences. Track your progress and discover authentic China.">
+  <meta name="keywords" content="China travel checklist, Beijing attractions, Shanghai guide, Xi'an terracotta army, Chengdu pandas, Chinese culture, travel planning">
   <style>
     body {
-      font-family: sans-serif;
-      padding: 1em;
-      max-width: 750px;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      line-height: 1.6;
+      padding: 0;
+      margin: 0;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      color: #333;
+    }
+    .container {
+      max-width: 1000px;
       margin: auto;
-      background: #f9f9f9;
+      padding: 2em;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 2em;
+      padding: 2em;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
     h1 {
+      color: #2c5aa0;
+      font-size: 2.5em;
+      margin-bottom: 0.5em;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+    .subtitle {
+      font-size: 1.1em;
+      color: #666;
+      font-style: italic;
+      margin-bottom: 1em;
+    }
+    .progress-info {
+      background: #e3f2fd;
+      border: 2px solid #2196f3;
+      border-radius: 8px;
+      padding: 1em;
+      margin: 1em 0;
       text-align: center;
+      font-weight: bold;
     }
     nav {
+      background: white;
+      padding: 1em;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       margin-bottom: 2em;
     }
     nav a {
       display: inline-block;
-      margin-right: 1em;
+      margin-right: 1.5em;
       text-decoration: none;
       color: #0366d6;
-      font-weight: bold;
+      font-weight: 600;
+      padding: 0.5em 1em;
+      border-radius: 4px;
+      transition: background-color 0.3s;
     }
     nav a:hover {
-      text-decoration: underline;
+      background-color: #e3f2fd;
+      text-decoration: none;
+    }
+    .intro-section {
+      background: white;
+      padding: 2em;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2em;
     }
     details {
-      margin-bottom: 1em;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      padding: 0.5em;
-      background: #fff;
+      margin-bottom: 1.5em;
+      border: 2px solid #e3f2fd;
+      border-radius: 12px;
+      padding: 0;
+      background: white;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+    details:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    details[open] {
+      border-color: #2196f3;
     }
     summary {
       font-weight: bold;
-      font-size: 1.2em;
+      font-size: 1.3em;
       cursor: pointer;
+      padding: 1.5em;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e3f2fd 100%);
+      border-radius: 12px;
+      transition: background 0.3s ease;
+    }
+    summary:hover {
+      background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    }
+    .checklist-content {
+      padding: 1.5em;
+    }
+    .destination-intro {
+      font-style: italic;
+      color: #666;
+      margin-bottom: 1.5em;
+      padding: 1em;
+      background: #f8f9fa;
+      border-radius: 8px;
+      border-left: 4px solid #2196f3;
     }
     label {
       display: block;
-      margin: 0.5em 0;
+      margin: 1em 0;
       cursor: pointer;
+      padding: 0.8em;
+      background: #f8f9fa;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      border: 1px solid #e9ecef;
+    }
+    label:hover {
+      background: #e3f2fd;
+      transform: translateX(5px);
+    }
+    input[type="checkbox"] {
+      margin-right: 1em;
+      transform: scale(1.2);
+    }
+    input[type="checkbox"]:checked + span {
+      text-decoration: line-through;
+      opacity: 0.7;
+    }
+    .cultural-note {
+      font-size: 0.9em;
+      color: #2c5aa0;
+      font-weight: normal;
+      display: block;
+      margin-top: 0.3em;
+    }
+    .travel-tips {
+      background: #fff3cd;
+      border: 1px solid #ffeaa7;
+      border-radius: 8px;
+      padding: 1.5em;
+      margin: 2em 0;
+    }
+    .travel-tips h3 {
+      color: #856404;
+      margin-bottom: 1em;
+    }
+    footer {
+      background: white;
+      margin-top: 3em;
+      padding: 2em;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    footer nav {
+      background: none;
+      box-shadow: none;
+      padding: 0;
+      margin-bottom: 1em;
+    }
+    footer nav a {
+      background: none;
+      font-size: 0.9em;
+    }
+    @media (max-width: 768px) {
+      .container {
+        padding: 1em;
+      }
+      h1 {
+        font-size: 2em;
+      }
+      summary {
+        font-size: 1.1em;
+        padding: 1em;
+      }
     }
   </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QEBJRV187V"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QEBJRV187V');
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9100701177300129"
+     crossorigin="anonymous"></script>
 </head>
 <body>
-  <h1>China Travel Adventure Checklist 🇨🇳</h1>
-  <nav>
-    <a href="index.html">🏠 Home</a>
-  </nav>  <details>
-    <summary>📍 Beijing</summary>
-    <label><input type="checkbox" data-id="bj-1"> Walk through the Forbidden City (故宫)</label>
-    <label><input type="checkbox" data-id="bj-2"> Climb the Great Wall (长城)</label>
-    <label><input type="checkbox" data-id="bj-3"> Eat Peking Duck (北京烤鸭)</label>
-    <label><input type="checkbox" data-id="bj-4"> Visit the Temple of Heaven (天坛)</label>
-    <label><input type="checkbox" data-id="bj-5"> Explore the hutongs and talk to a local</label>
-  </details>  <details>
-    <summary>📍 Shanghai</summary>
-    <label><input type="checkbox" data-id="sh-1"> View the skyline from the Bund (外滩)</label>
-    <label><input type="checkbox" data-id="sh-2"> Ride the Maglev train</label>
-    <label><input type="checkbox" data-id="sh-3"> Visit Yu Garden (豫园)</label>
-    <label><input type="checkbox" data-id="sh-4"> Try xiaolongbao (小笼包)</label>
-    <label><input type="checkbox" data-id="sh-5"> Walk through Nanjing Road (南京路)</label>
-  </details>  <details>
-    <summary>📍 Xi'an</summary>
-    <label><input type="checkbox" data-id="xa-1"> See the Terracotta Army (兵马俑)</label>
-    <label><input type="checkbox" data-id="xa-2"> Bike on the Ancient City Wall</label>
-    <label><input type="checkbox" data-id="xa-3"> Eat hand-pulled noodles (biang biang 面)</label>
-    <label><input type="checkbox" data-id="xa-4"> Visit the Muslim Quarter</label>
-  </details>  <details>
-    <summary>📍 Chengdu</summary>
-    <label><input type="checkbox" data-id="cd-1"> Visit the Panda Research Base 🐼</label>
-    <label><input type="checkbox" data-id="cd-2"> Eat hotpot (火锅)</label>
-    <label><input type="checkbox" data-id="cd-3"> Watch Sichuan opera face-changing show</label>
-    <label><input type="checkbox" data-id="cd-4"> Relax in a teahouse</label>
-  </details>  <details>
-    <summary>📍 Guilin & Yangshuo</summary>
-    <label><input type="checkbox" data-id="gl-1"> Take a boat ride on the Li River</label>
-    <label><input type="checkbox" data-id="gl-2"> See the karst mountains</label>
-    <label><input type="checkbox" data-id="gl-3"> Ride a bike through rice fields</label>
-    <label><input type="checkbox" data-id="gl-4"> Watch the Impression Liu Sanjie show</label>
-  </details>  <details>
-    <summary>📍 Bonus Culture Challenges 🎯</summary>
-    <label><input type="checkbox" data-id="bonus-1"> Use chopsticks to finish a full meal</label>
-    <label><input type="checkbox" data-id="bonus-2"> Say "谢谢" (thank you) to a local</label>
-    <label><input type="checkbox" data-id="bonus-3"> Pay with WeChat or Alipay</label>
-    <label><input type="checkbox" data-id="bonus-4"> Try a Chinese calligraphy brush</label>
-    <label><input type="checkbox" data-id="bonus-5"> Learn to say "hello" in at least 3 dialects</label>
-  </details>  <script>
+  <div class="container">
+    <header>
+      <h1>Ultimate China Travel Adventure Checklist 🇨🇳</h1>
+      <div class="subtitle">Your Complete Guide to Exploring the Middle Kingdom</div>
+      <div class="progress-info">
+        ✓ Your progress is automatically saved as you check off items
+      </div>
+    </header>
+    
+    <nav>
+      <a href="index.html">🏠 Home</a>
+      <a href="about.html">About Us</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms-of-service.html">Terms of Service</a>
+      <a href="contact.html">Contact</a>
+      <a href="feedback.html">Feedback</a>
+    </nav>
+
+    <div class="intro-section">
+      <h2>Welcome to Your China Adventure</h2>
+      <p>China offers an incredible diversity of experiences, from ancient historical sites that span thousands of years to ultra-modern cities that define the future. This comprehensive checklist covers the essential destinations and experiences that will give you a deep appreciation for Chinese culture, history, and modern achievements.</p>
+      <p><strong>How to use this checklist:</strong> Check off items as you complete them - your progress is automatically saved in your browser. Each destination includes cultural context to enrich your understanding of what makes these places special.</p>
+    </div>
+
+    <details>
+      <summary>📍 Beijing - The Imperial Capital</summary>
+      <div class="checklist-content">
+        <div class="destination-intro">
+          Beijing, China's capital for over 700 years, seamlessly blends imperial grandeur with modern dynamism. Home to some of China's most iconic landmarks and political center of the nation.
+        </div>
+        <label>
+          <input type="checkbox" data-id="bj-1">
+          <span>Walk through the Forbidden City (故宫) - Palace Museum
+            <div class="cultural-note">Explore the world's largest palace complex, home to 24 emperors during the Ming and Qing dynasties</div>
+          </span>
+        </label>
+        <label>
+          <input type="checkbox" data-id="bj-2">
+          <span>Climb the Great Wall (长城) at Mutianyu or Badaling
+            <div class="cultural-note">Experience one of humanity's greatest architectural achievements, built over 2,000 years</div>
+          </span>
+        </label>
+        <label>
+          <input type="checkbox" data-id="bj-3">
+          <span>Eat authentic Peking Duck (北京烤鸭)
+            <div class="cultural-note">Try Beijing's most famous culinary export at a traditional restaurant like Quanjude</div>
+          </span>
+        </label>
+        <label>
+          <input type="checkbox" data-id="bj-4">
+          <span>Visit the Temple of Heaven (天坛)
+            <div class="cultural-note">Marvel at the architectural perfection of this sacred site where emperors prayed for good harvests</div>
+          </span>
+        </label>
+        <label>
+          <input type="checkbox" data-id="bj-5">
+          <span>Explore the hutongs and connect with local culture
+            <div class="cultural-note">Wander through traditional alleyways to experience authentic Beijing neighborhood life</div>
+          </span>
+        </label>
+      </div>
+    </details>
+
+    <details>
+      <summary>📍 Shanghai - The Modern Metropolis</summary>
+      <div class="checklist-content">
+        <div class="destination-intro">
+          China's financial and commercial hub, Shanghai represents the country's rapid modernization while preserving its colonial heritage along the historic Bund waterfront.
+        </div>
+        <label>
+          <input type="checkbox" data-id="sh-1">
+          <span>View the skyline from the Bund (外滩)
+            <div class="cultural-note">Walk along the historic waterfront promenade with colonial architecture facing futuristic skyscrapers</div>
+          </span>
+        </label>
+        <label>
+          <input type="checkbox" data-id="sh-2">
+          <span>Ride the Maglev train from Pudong Airport
+            <div class="cultural-note">Experience magnetic levitation technology reaching speeds of 431 km/h (268 mph)</div>
+          </span>
+        </label>
+        <label>
+          <input type="checkbox" data-id="sh-3">
+          <span>Visit Yu Garden (豫园) and the Old City
+            <div class="cultural-note">Explore this 400-year-old classical Chinese garden and traditional bazaar</div>
+          </span>
+        </label>
+        <label>
+          <input type="checkbox" data-id="sh-4">
+          <span>Try xiaolongbao (小笼包) soup dumplings
+            <div class="cultural-note">Savor Shanghai's most famous dish at Din Tai Fung or a local dumpling house</div>
+          </span>
+        </label>
+        <label>
+          <input type="checkbox" data-id="sh-5">
+          <span>Walk through Nanjing Road (南京路) shopping district
+            <div class="cultural-note">Experience one of the world's busiest shopping streets, both historic Nanjing East Road and modern Nanjing West Road</div>
+          </span>
+        </label>
+      </div>
+    </details>
+
+    <details>
+      <summary>📍 Xi'an - Ancient Capital of Dynasties</summary>
+      <div class="checklist-content">
+        <div class="destination-intro">
+          The eastern terminus of the Silk Road, Xi'an served as China's capital for over 1,000 years and houses some of the country's most significant archaeological treasures.
+        </div>
+        <label>
+          <input type="checkbox" data-id="xa-1">
+          <span>See the Terracotta Army (兵马俑)
+            <div class="cultural-note">Marvel at over 8,000 life-sized terracotta soldiers guarding Emperor Qin Shi Huang's tomb</div>
+          </span>
+        </label>
+        <label>
+          <input type="checkbox" data-id="xa-2">
+          <span>Bike on the Ancient City Wall
+            <div class="cultural-note">Cycle along the best-preserved city wall in China, built during the Ming Dynasty</div>
+          </span>
+        </label>
+        <label>
+          <input type="checkbox" data-id="xa-3">
+          <span>Eat hand-pulled noodles (biang biang 面)
+            <div class="cultural-note">Try Xi'an's signature noodle dish - the character for "biang" is one of the most complex in Chinese</div>
+          </span>
+        </label>
+        <label>
+          <input type="checkbox" data-id="xa-4">
+          <span>Visit the Muslim Quarter (回民街)
+            <div class="cultural-note">Explore the vibrant cultural blend where Han Chinese and Hui Muslim traditions intersect</div>
+          </span>
+        </label>
+      </div>
+    </details>
+
+    <details>
+      <summary>📍 Chengdu - Gateway to Tibet and Panda Capital</summary>
+      <div class="checklist-content">
+        <div class="destination-intro">
+          The laid-back capital of Sichuan Province, famous for its spicy cuisine, tea culture, and being home to the world's largest panda breeding center.
+        </div>
+        <label>
+          <input type="checkbox" data-id="cd-1">
+          <span>Visit the Chengdu Panda Research Base 🐼
+            <div class="cultural-note">See giant pandas in a natural habitat setting - best visited in the morning when pandas are most active</div>
+          </span>
+        </label>
+        <label>
+          <input type="checkbox" data-id="cd-2">
+          <span>Eat authentic Sichuan hotpot (火锅)
+            <div class="cultural-note">Experience the numbing spice of Sichuan peppercorns in this social dining experience</div>
+          </span>
+        </label>
+        <label>
+          <input type="checkbox" data-id="cd-3">
+          <span>Watch Sichuan opera face-changing show
+            <div class="cultural-note">Witness the ancient art of "bian lian" where performers change masks instantaneously</div>
+          </span>
+        </label>
+        <label>
+          <input type="checkbox" data-id="cd-4">
+          <span>Relax in a traditional teahouse
+            <div class="cultural-note">Join locals for tea, mahjong, and conversation - experiencing Chengdu's famous "slow living" culture</div>
+          </span>
+        </label>
+      </div>
+    </details>
+
+    <details>
+      <summary>📍 Guilin & Yangshuo - Karst Landscape Wonder</summary>
+      <div class="checklist-content">
+        <div class="destination-intro">
+          Southern China's most scenic region, featuring the limestone karst landscape that has inspired Chinese painters and poets for centuries.
+        </div>
+        <label>
+          <input type="checkbox" data-id="gl-1">
+          <span>Take a boat ride on the Li River (漓江)
+            <div class="cultural-note">Cruise through the landscape depicted on the 20 yuan banknote - limestone peaks rising from emerald waters</div>
+          </span>
+        </label>
+        <label>
+          <input type="checkbox" data-id="gl-2">
+          <span>Photograph the iconic karst mountains
+            <div class="cultural-note">Capture the otherworldly landscape that has been the subject of Chinese landscape painting for over 1,000 years</div>
+          </span>
+        </label>
+        <label>
+          <input type="checkbox" data-id="gl-3">
+          <span>Bike through rice terraces and rural villages
+            <div class="cultural-note">Experience traditional rural Chinese life in the countryside around Yangshuo</div>
+          </span>
+        </label>
+        <label>
+          <input type="checkbox" data-id="gl-4">
+          <span>Watch the "Impression Liu Sanjie" show
+            <div class="cultural-note">See this outdoor spectacle using the Li River and karst mountains as a natural stage backdrop</div>
+          </span>
+        </label>
+      </div>
+    </details>
+
+    <details>
+      <summary>📍 Cultural Immersion Challenges 🎯</summary>
+      <div class="checklist-content">
+        <div class="destination-intro">
+          Go beyond tourist attractions with these cultural experiences that will deepen your connection to Chinese traditions and modern life.
+        </div>
+        <label>
+          <input type="checkbox" data-id="bonus-1">
+          <span>Master eating with chopsticks for a full meal
+            <div class="cultural-note">Practice this essential skill - it shows respect for Chinese dining culture</div>
+          </span>
+        </label>
+        <label>
+          <input type="checkbox" data-id="bonus-2">
+          <span>Say "谢谢" (xiè xie - thank you) to a local person
+            <div class="cultural-note">Break the language barrier with this simple but meaningful gesture</div>
+          </span>
+        </label>
+        <label>
+          <input type="checkbox" data-id="bonus-3">
+          <span>Pay with WeChat Pay or Alipay mobile payment
+            <div class="cultural-note">Experience China's cashless society - even street vendors use QR codes</div>
+          </span>
+        </label>
+        <label>
+          <input type="checkbox" data-id="bonus-4">
+          <span>Try Chinese calligraphy (书法) with a brush
+            <div class="cultural-note">Attempt this ancient art form that combines writing, meditation, and artistic expression</div>
+          </span>
+        </label>
+        <label>
+          <input type="checkbox" data-id="bonus-5">
+          <span>Learn greetings in different Chinese dialects
+            <div class="cultural-note">Try "nǐ hǎo" (Mandarin), "nín hào" (polite Mandarin), "nóng hóu" (Cantonese)</div>
+          </span>
+        </label>
+      </div>
+    </details>
+
+    <div class="travel-tips">
+      <h3>💡 Essential Travel Tips</h3>
+      <ul>
+        <li><strong>Best Time to Visit:</strong> April-May and September-October offer pleasant weather and fewer crowds</li>
+        <li><strong>Visa Requirements:</strong> Most visitors need a Chinese visa - apply well in advance</li>
+        <li><strong>Internet Access:</strong> Consider a VPN for accessing blocked websites and services</li>
+        <li><strong>Language:</strong> Download translation apps like Pleco or Google Translate with offline Chinese</li>
+        <li><strong>Transportation:</strong> High-speed trains connect major cities efficiently - book tickets in advance</li>
+        <li><strong>Cultural Etiquette:</strong> Bring business cards, avoid pointing with your finger, and show respect at temples</li>
+      </ul>
+    </div>
+
+    <footer>
+      <nav>
+        <a href="about.html">About Us</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="contact.html">Contact</a>
+        <a href="feedback.html">💬 Feedback</a>
+      </nav>
+      <p>&copy; 2025 China Travel Help. All rights reserved. | Your comprehensive guide to authentic China experiences.</p>
+    </footer>
+  </div>
+
+  <script>
     document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
       const id = cb.dataset.id;
+      // Load saved state
       cb.checked = localStorage.getItem(id) === 'true';
+      
+      // Save state when changed
       cb.addEventListener('change', () => {
         localStorage.setItem(id, cb.checked);
       });
     });
-  </script></body>
+
+    // Track progress
+    function updateProgress() {
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      const checked = document.querySelectorAll('input[type="checkbox"]:checked').length;
+      const total = checkboxes.length;
+      const percentage = Math.round((checked / total) * 100);
+      
+      document.querySelector('.progress-info').innerHTML = 
+        `✓ Progress: ${checked}/${total} completed (${percentage}%) - Your journey is automatically saved!`;
+    }
+
+    // Update progress on load and when checkboxes change
+    document.addEventListener('DOMContentLoaded', updateProgress);
+    document.addEventListener('change', updateProgress);
+  </script>
+</body>
 </html>

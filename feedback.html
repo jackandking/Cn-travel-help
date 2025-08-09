@@ -3,52 +3,209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Feedback</title>
+    <title>User Feedback - China Travel Help</title>
+    <meta name="description" content="Share your travel experiences and help us improve China Travel Help. Your feedback helps us create better travel resources for everyone.">
     <style>
         body {
-            font-family: sans-serif;
-            padding: 1em;
-            max-width: 800px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            line-height: 1.6;
+            padding: 2em;
+            max-width: 900px;
             margin: auto;
+            background: #ffffff;
+            color: #333;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 2em;
+            padding-bottom: 1em;
+            border-bottom: 2px solid #0366d6;
         }
         nav {
             margin-bottom: 2em;
+            padding: 1em;
+            background: #f8f9fa;
+            border-radius: 8px;
         }
         nav a {
             display: inline-block;
-            margin-right: 1em;
+            margin-right: 1.5em;
             text-decoration: none;
             color: #0366d6;
-            font-weight: bold;
+            font-weight: 600;
+            padding: 0.5em 1em;
+            border-radius: 4px;
+            transition: background-color 0.3s;
         }
         nav a:hover {
-            text-decoration: underline;
+            background-color: #e3f2fd;
+            text-decoration: none;
+        }
+        h1 {
+            color: #2c5aa0;
+            font-size: 2.5em;
+            margin-bottom: 0.2em;
+        }
+        h2 {
+            color: #2c5aa0;
+            font-size: 1.5em;
+            margin-top: 2em;
+            margin-bottom: 1em;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5em;
+        }
+        .feedback-intro {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 1.5em;
+            margin: 2em 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .feedback-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5em;
+            margin: 2em 0;
+        }
+        .feedback-option {
+            background: #f8f9fa;
+            padding: 1.5em;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            text-align: center;
+        }
+        .feedback-option h3 {
+            color: #2c5aa0;
+            margin-bottom: 0.5em;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: #0366d6;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0.5em;
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            background-color: #0256cc;
+            text-decoration: none;
+            transform: translateY(-2px);
+        }
+        .github-button {
+            background-color: #28a745;
+        }
+        .github-button:hover {
+            background-color: #218838;
+        }
+        iframe {
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 2em 0;
+        }
+        footer {
+            margin-top: 3em;
+            padding-top: 2em;
+            border-top: 1px solid #eee;
+            text-align: center;
+            color: #666;
+        }
+        .thank-you {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            padding: 1.5em;
+            margin: 2em 0;
+            text-align: center;
         }
     </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QEBJRV187V"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-QEBJRV187V');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9100701177300129"
+        crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>We value your feedback!</h1>
+    <header>
+        <h1>We Value Your Feedback!</h1>
+        <p>Help Us Improve Your China Travel Experience</p>
+    </header>
+    
     <nav>
         <a href="index.html">🏠 Home</a>
+        <a href="about.html">About Us</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="contact.html">Contact</a>
     </nav>
-    <p>Please take a moment to share your thoughts with us.</p>
+
+    <div class="feedback-intro">
+        <p>Your experiences and suggestions are invaluable in helping us create the most comprehensive and useful China travel resources. Whether you've used our checklists during your trip, have ideas for improvements, or want to share your travel stories, we'd love to hear from you!</p>
+    </div>
+
+    <h2>Share Your Experience</h2>
+    <p>Please take a few minutes to share your thoughts with us using the form below. Your feedback helps us improve our content and create better resources for future travelers.</p>
 
     <iframe 
         src="https://docs.google.com/forms/d/e/1FAIpQLSd0gGUI0WaLZaLtjuTVKIW74Q5nWGc3AkYDPMC1d_TKsZ1mnw/viewform?embedded=true" 
         width="100%" height="800" frameborder="0" marginheight="0" marginwidth="0">
-        Loading…
+        Loading feedback form...
     </iframe>
 
-    <a href="https://github.com/jackandking/Cn-travel-help/issues/new?template=feedback.yml" target="_blank" style="
-    display: inline-block;
-    background-color: green;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: bold;
-">
-    📝 Report a GitHub Issue / Give Advanced Feedback
-    </a>
+    <h2>Additional Feedback Options</h2>
+    
+    <div class="feedback-options">
+        <div class="feedback-option">
+            <h3>🐛 Report Technical Issues</h3>
+            <p>Found a bug or technical problem? Help us fix it by reporting it directly to our development team.</p>
+            <a href="https://github.com/jackandking/Cn-travel-help/issues/new" target="_blank" class="cta-button github-button">
+                📝 Report Issue on GitHub
+            </a>
+        </div>
+        
+        <div class="feedback-option">
+            <h3>💡 Suggest New Features</h3>
+            <p>Have ideas for new destinations, features, or improvements? Join our community discussions.</p>
+            <a href="https://github.com/jackandking/Cn-travel-help/discussions" target="_blank" class="cta-button github-button">
+                💬 Join Discussion
+            </a>
+        </div>
+        
+        <div class="feedback-option">
+            <h3>📧 Direct Contact</h3>
+            <p>Need to reach us directly? Use our contact page for personalized assistance.</p>
+            <a href="contact.html" class="cta-button">
+                📞 Contact Us
+            </a>
+        </div>
+    </div>
+
+    <div class="thank-you">
+        <h3>Thank You for Your Support!</h3>
+        <p>Every piece of feedback helps us make China Travel Help more useful and comprehensive. We read every submission and use your input to guide our content updates and feature development.</p>
+    </div>
+
+    <h2>What Happens Next?</h2>
+    <ul>
+        <li><strong>Review:</strong> We review all feedback submissions within 3-5 business days</li>
+        <li><strong>Implementation:</strong> Valuable suggestions are prioritized for our next content updates</li>
+        <li><strong>Recognition:</strong> Contributors may be acknowledged in our updates (with permission)</li>
+        <li><strong>Community:</strong> Great suggestions are shared with our GitHub community for discussion</li>
+    </ul>
+
+    <footer>
+        <p>&copy; 2025 China Travel Help. All rights reserved. | 
+        <a href="privacy-policy.html">Privacy Policy</a> | 
+        <a href="terms-of-service.html">Terms of Service</a> | 
+        <a href="about.html">About</a> | 
+        <a href="contact.html">Contact</a></p>
+    </footer>
 </body>
 </html>
