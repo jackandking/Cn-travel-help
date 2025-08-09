@@ -19,9 +19,10 @@ Welcome to **China Travel Help** – a lightweight, interactive set of travel ch
 ## 📌 Available Checklists
 
 - [China Travel Checklist](China-travel-checklist.html)
-- [Beijing Travel Checklist](Beijing-travel-checklist.html)
-- [Shanghai Travel Checklist](Shanghai-travel-checklist.html)
-- [Guangzhou Travel Checklist](Guangzhou-travel-checklist.html)
+- [Beijing Travel Checklist](Beijing-travel-checklist.html) & [🧒 Beijing Kids Checklist](Beijing-kids-checklist.html)
+- [Shanghai Travel Checklist](Shanghai-travel-checklist.html) & [🧒 Shanghai Kids Checklist](Shanghai-kids-checklist.html)
+- [Xi'an Travel Checklist](Xi-an-travel-checklist.html) & [🧒 Xi'an Kids Checklist](Xi-an-kids-checklist.html)
+- [Guangzhou Travel Checklist](Guangzhou-travel-checklist.html) & [🧒 Guangzhou Kids Checklist](Guangzhou-kids-checklist.html)
 - [Cambridge Kid Travel Checklist](Cambridge-kid-checklist.html)
 
 More destinations coming soon!
