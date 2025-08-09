@@ -8,6 +8,19 @@
     h1 { color: #0077aa; }
     label { display: block; margin-bottom: 0.5em; }
     input[type="checkbox"] { margin-right: 0.5em; }
+    nav {
+      margin-bottom: 2em;
+    }
+    nav a {
+      display: inline-block;
+      margin-right: 1em;
+      text-decoration: none;
+      color: #0366d6;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
   </style>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -23,6 +36,13 @@
 </head>
 <body>
   <h1>🧳 Shanghai Travel Checklist</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="China-travel-checklist.html">China Travel Checklist</a>
+    <a href="Beijing-travel-checklist.html">Beijing Travel Checklist</a>
+    <a href="Xi-an-travel-checklist.html">Xi'an Travel Checklist</a>
+    <a href="Cambridge-kid-checklist.html">Cambridge Kid Checklist</a>
+  </nav>
   <p>Tick the boxes as you explore Shanghai's top attractions!</p>  <h2>🏙️ Iconic Attractions</h2>
   <label><input type="checkbox" id="bund">The Bund (Waitan)</label>
   <label><input type="checkbox" id="shanghaiTower">Shanghai Tower</label>
@@ -36,6 +56,6 @@
   <label><input type="checkbox" id="frenchConcession">Former French Concession</label>  <h2>🍜 Local Experiences</h2>
   <label><input type="checkbox" id="dumplings">Eat soup dumplings (Xiaolongbao)</label>
   <label><input type="checkbox" id="huangpuCruise">Huangpu River Cruise</label>
-  <label><input type="checkbox" id="maglev">Take the Maglev train</label>  <p><a href="index.html">⬅️ Back to Home</a></p>
+  <label><input type="checkbox" id="maglev">Take the Maglev train</label>
 </body>
 </html>
