@@ -1,27 +1,178 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF‑8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>China Travel Help</title>
+  <title>China Travel Help - Your Comprehensive Guide to Exploring China</title>
+  <meta name="description" content="Interactive travel checklists and comprehensive guides for China. Explore Beijing, Shanghai, Xi'an, Guangzhou and more with our detailed travel resources.">
+  <meta name="keywords" content="China travel, travel checklist, Beijing guide, Shanghai travel, Xi'an attractions, Guangzhou tourism, China tourism">
   <style>
     body {
-      font-family: sans-serif;
-      padding: 1em;
-      max-width: 800px;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      line-height: 1.6;
+      padding: 0;
+      margin: 0;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      color: #333;
+    }
+    .container {
+      max-width: 1000px;
       margin: auto;
+      padding: 2em;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 3em;
+      padding: 2em;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      color: #2c5aa0;
+      font-size: 3em;
+      margin-bottom: 0.2em;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+    .subtitle {
+      font-size: 1.3em;
+      color: #666;
+      font-style: italic;
+      margin-bottom: 1em;
+    }
+    .hero-description {
+      font-size: 1.1em;
+      margin-bottom: 2em;
+      color: #555;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
     }
     nav {
+      background: white;
+      padding: 1.5em;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-bottom: 3em;
+    }
+    .nav-section {
       margin-bottom: 2em;
+    }
+    .nav-section:last-child {
+      margin-bottom: 0;
+    }
+    .nav-title {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #2c5aa0;
+      margin-bottom: 1em;
+      border-bottom: 2px solid #e3f2fd;
+      padding-bottom: 0.5em;
+    }
+    .nav-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1em;
     }
     nav a {
       display: inline-block;
-      margin-right: 1em;
+      padding: 1em 1.5em;
       text-decoration: none;
       color: #0366d6;
-      font-weight: bold;
+      font-weight: 600;
+      background: #f8f9fa;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
     }
     nav a:hover {
-      text-decoration: underline;
+      background: #e3f2fd;
+      border-color: #2196f3;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      text-decoration: none;
+    }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2em;
+      margin: 3em 0;
+    }
+    .feature {
+      background: white;
+      padding: 2em;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    .feature:hover {
+      transform: translateY(-5px);
+    }
+    .feature-icon {
+      font-size: 3em;
+      margin-bottom: 1em;
+    }
+    .feature h3 {
+      color: #2c5aa0;
+      margin-bottom: 1em;
+    }
+    footer {
+      background: white;
+      margin-top: 4em;
+      padding: 2em;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    footer nav {
+      background: none;
+      box-shadow: none;
+      padding: 0;
+      margin-bottom: 1em;
+    }
+    footer nav a {
+      background: none;
+      padding: 0.5em 1em;
+      margin: 0 0.5em;
+      font-size: 0.9em;
+    }
+    .cta-section {
+      background: #2c5aa0;
+      color: white;
+      padding: 2em;
+      border-radius: 12px;
+      text-align: center;
+      margin: 3em 0;
+    }
+    .cta-button {
+      display: inline-block;
+      background: white;
+      color: #2c5aa0;
+      padding: 1em 2em;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 0.5em;
+      transition: transform 0.3s ease;
+    }
+    .cta-button:hover {
+      transform: scale(1.05);
+      text-decoration: none;
+    }
+    @media (max-width: 768px) {
+      .container {
+        padding: 1em;
+      }
+      h1 {
+        font-size: 2.2em;
+      }
+      .nav-links {
+        grid-template-columns: 1fr;
+      }
+      .features {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
   <!-- Google tag (gtag.js) -->
@@ -36,27 +187,85 @@
      crossorigin="anonymous"></script>
 </head>
 <body>
-  <h1>China Travel Help</h1>
-  <nav>
-    <a href="China-travel-checklist.html">China Travel Checklist</a>
-    
-    <a href="Beijing-travel-checklist.html">Beijing Travel Checklist</a>
-    <a href="Beijing-kids-checklist.html">🧒 Beijing Kids Checklist</a>
-    
-    <a href="Shanghai-travel-checklist.html">Shanghai Travel Checklist</a>
-    <a href="Shanghai-kids-checklist.html">🧒 Shanghai Kids Checklist</a>
+  <div class="container">
+    <header>
+      <h1>🇨🇳 China Travel Help</h1>
+      <div class="subtitle">Your Comprehensive Guide to Exploring China</div>
+      <div class="hero-description">
+        Discover the wonders of China with our interactive travel checklists and expert guides. From the Great Wall of Beijing to the modern skyline of Shanghai, we help you plan and track your perfect Chinese adventure with detailed, culturally-rich travel resources.
+      </div>
+    </header>
 
-    <a href="Xi-an-travel-checklist.html">Xi'an Travel Checklist</a>
-    <a href="Xi-an-kids-checklist.html">🧒 Xi'an Kids Checklist</a>
+    <nav>
+      <div class="nav-section">
+        <div class="nav-title">🗺️ Comprehensive Travel Checklists</div>
+        <div class="nav-links">
+          <a href="China-travel-checklist.html">🇨🇳 Complete China Overview</a>
+        </div>
+      </div>
 
-    <a href="Guangzhou-travel-checklist.html">Guangzhou Travel Checklist</a>
-    <a href="Guangzhou-kids-checklist.html">🧒 Guangzhou Kids Checklist</a>
+      <div class="nav-section">
+        <div class="nav-title">🏛️ Major Destinations</div>
+        <div class="nav-links">
+          <a href="Beijing-travel-checklist.html">🏛️ Beijing - Imperial Capital</a>
+          <a href="Shanghai-travel-checklist.html">🏙️ Shanghai - Modern Metropolis</a>
+          <a href="Xi-an-travel-checklist.html">🏺 Xi'an - Ancient Treasures</a>
+          <a href="Guangzhou-travel-checklist.html">🌆 Guangzhou - Southern Gateway</a>
+        </div>
+      </div>
 
-    <a href="Cambridge-kid-checklist.html">Cambridge Kid Checklist</a>
-  </nav>
-  <p>Welcome to your gateway for interactive travel checklists and guides.</p>
-  <p>Select one of the checklists above to start your adventure!</p>
-<a href="feedback.html">💬 Give Feedback</a>
+      <div class="nav-section">
+        <div class="nav-title">👨‍👩‍👧‍👦 Family-Friendly Adventures</div>
+        <div class="nav-links">
+          <a href="Beijing-kids-checklist.html">🧒 Beijing for Kids</a>
+          <a href="Shanghai-kids-checklist.html">🧒 Shanghai Family Fun</a>
+          <a href="Xi-an-kids-checklist.html">🧒 Xi'an Kid Adventures</a>
+          <a href="Guangzhou-kids-checklist.html">🧒 Guangzhou Family Guide</a>
+          <a href="Cambridge-kid-checklist.html">🧒 Cambridge Family Checklist</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">✅</div>
+        <h3>Interactive Checklists</h3>
+        <p>Track your progress with smart checklists that save your accomplishments locally. Never lose track of what you've seen and what's still on your list!</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🏛️</div>
+        <h3>Cultural Context</h3>
+        <p>Each attraction includes historical background and cultural significance, helping you understand and appreciate China's rich heritage beyond just sightseeing.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📱</div>
+        <h3>Mobile Optimized</h3>
+        <p>Access your travel checklists on any device. Perfect for planning at home on desktop or checking off items while exploring with your mobile device.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🎯</div>
+        <h3>Expertly Curated</h3>
+        <p>Our checklists combine must-see attractions with hidden gems, local cuisine recommendations, and practical travel tips for an authentic experience.</p>
+      </div>
+    </div>
+
+    <div class="cta-section">
+      <h2>Ready to Explore China?</h2>
+      <p>Start planning your adventure today with our comprehensive travel resources. Whether you're a first-time visitor or returning to explore more, we have the perfect checklist for your journey.</p>
+      <a href="China-travel-checklist.html" class="cta-button">Start Your Journey</a>
+      <a href="about.html" class="cta-button">Learn More About Us</a>
+    </div>
+
+    <footer>
+      <nav>
+        <a href="about.html">About Us</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="contact.html">Contact</a>
+        <a href="feedback.html">💬 Feedback</a>
+      </nav>
+      <p>&copy; 2025 China Travel Help. All rights reserved. | Making China travel accessible and memorable for everyone.</p>
+    </footer>
+  </div>
 </body>
-  
 </html>
