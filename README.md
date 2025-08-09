@@ -4,7 +4,9 @@ Welcome to **China Travel Help** – a lightweight, interactive set of travel ch
 
 ## ✨ Features
 
-- ✅ Interactive checklists for major Chinese cities
+- ✅ Interactive checklists for travel preparation and destination activities
+- 🧳 Comprehensive preparation checklists covering documents, packing, health & safety
+- 🇨🇳 China-specific preparation guidance and cultural tips
 - 📱 Mobile-friendly design
 - 🧠 LocalStorage support — your checklist progress is saved automatically
 - 🔗 GitHub Pages ready — share as a public trip resource or use offline
@@ -18,9 +20,15 @@ Welcome to **China Travel Help** – a lightweight, interactive set of travel ch
 
 ## 📌 Available Checklists
 
-- [China Travel Checklist](China-travel-checklist.html)
-- [Beijing Travel Checklist](Beijing-travel-checklist.html)
-- [Cambridge Kid Travel Checklist](Cambridge-kid-checklist.html)
+### 🧳 Travel Preparation
+- [Travel Preparation Checklist](travel-preparation-checklist.html) - Essential items, documents, health & safety
+- [China Preparation Checklist](china-preparation-checklist.html) - China-specific preparation requirements
+
+### 🎯 Destination Activities  
+- [China Travel Checklist](China-travel-checklist.html) - Activities across major Chinese cities
+- [Beijing Travel Checklist](Beijing-travel-checklist.html) - Beijing-specific attractions and experiences
+- [Shanghai Travel Checklist](Shanghai-travel-checklist.html) - Shanghai city highlights
+- [Cambridge Kid Travel Checklist](Cambridge-kid-checklist.html) - Family-friendly activities
 
 More destinations coming soon!
 
