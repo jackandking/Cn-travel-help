@@ -20,6 +20,8 @@ Welcome to **China Travel Help** – a lightweight, interactive set of travel ch
 
 - [China Travel Checklist](China-travel-checklist.html)
 - [Beijing Travel Checklist](Beijing-travel-checklist.html)
+- [Shanghai Travel Checklist](Shanghai-travel-checklist.html)
+- [Guangzhou Travel Checklist](Guangzhou-travel-checklist.html)
 - [Cambridge Kid Travel Checklist](Cambridge-kid-checklist.html)
 
 More destinations coming soon!
