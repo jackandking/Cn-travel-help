@@ -1,0 +1,122 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beijing Kids Travel Checklist</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 1em;
+      max-width: 700px;
+      margin: auto;
+      background: #fefefe;
+    }
+    h1 {
+      text-align: center;
+      color: #ff6b6b;
+    }
+    nav {
+      margin-bottom: 2em;
+    }
+    nav a {
+      display: inline-block;
+      margin-right: 1em;
+      text-decoration: none;
+      color: #0366d6;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    details {
+      margin-bottom: 1em;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 0.5em;
+      background: #f9f9f9;
+    }
+    summary {
+      font-weight: bold;
+      font-size: 1.2em;
+      cursor: pointer;
+    }
+    label {
+      display: block;
+      margin: 0.5em 0;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧒 Beijing Kids Adventure Checklist</h1>
+  <nav>
+    <a href="index.html">🏠 Home</a>
+  </nav>
+
+  <details>
+    <summary>🏰 The Forbidden City Adventure</summary>
+    <p>Become a young explorer in the emperor's palace! Can you find all the hidden treasures?</p>
+    <label><input type="checkbox" data-id="kids-forbidden-1"> Count how many lions you can find (hint: look for stone lions!)</label>
+    <label><input type="checkbox" data-id="kids-forbidden-2"> Find a dragon decoration and make a dragon face</label>
+    <label><input type="checkbox" data-id="kids-forbidden-3"> Walk like an emperor through the big gates</label>
+    <label><input type="checkbox" data-id="kids-forbidden-4"> Take a photo pretending to sit on the emperor's throne</label>
+  </details>
+
+  <details>
+    <summary>🎯 Temple of Heaven Fun</summary>
+    <p>This magical place has special sound tricks and beautiful buildings!</p>
+    <label><input type="checkbox" data-id="kids-temple-1"> Clap your hands and listen for the echo</label>
+    <label><input type="checkbox" data-id="kids-temple-2"> Find the round building (Hall of Prayer)</label>
+    <label><input type="checkbox" data-id="kids-temple-3"> Watch people doing morning exercises</label>
+    <label><input type="checkbox" data-id="kids-temple-4"> Try to walk in a straight line on the stone path</label>
+  </details>
+
+  <details>
+    <summary>🏔️ Great Wall Challenge</summary>
+    <p>Climb the famous Great Wall like a brave warrior!</p>
+    <label><input type="checkbox" data-id="kids-wall-1"> Count 50 steps on the wall</label>
+    <label><input type="checkbox" data-id="kids-wall-2"> Look through a watchtower window</label>
+    <label><input type="checkbox" data-id="kids-wall-3"> Take a superhero pose photo on the wall</label>
+    <label><input type="checkbox" data-id="kids-wall-4"> Find someone else to high-five at the top</label>
+  </details>
+
+  <details>
+    <summary>🏘️ Hutong Treasure Hunt</summary>
+    <p>Explore the old Beijing neighborhoods and find cool stuff!</p>
+    <label><input type="checkbox" data-id="kids-hutong-1"> Find a courtyard with plants</label>
+    <label><input type="checkbox" data-id="kids-hutong-2"> Say "Ni Hao" (hello) to someone local</label>
+    <label><input type="checkbox" data-id="kids-hutong-3"> Ride in a rickshaw (like a bike taxi!)</label>
+    <label><input type="checkbox" data-id="kids-hutong-4"> Spot a red lantern hanging up</label>
+  </details>
+
+  <details>
+    <summary>🥟 Yummy Food Mission</summary>
+    <p>Try delicious Beijing food - it's like a tasty adventure!</p>
+    <label><input type="checkbox" data-id="kids-food-1"> Eat Peking Duck (crispy duck in a pancake) 🦆</label>
+    <label><input type="checkbox" data-id="kids-food-2"> Try dumplings (little pockets of yumminess)</label>
+    <label><input type="checkbox" data-id="kids-food-3"> Drink something warm like hot chocolate Chinese-style</label>
+    <label><input type="checkbox" data-id="kids-food-4"> Learn to pick up food with chopsticks</label>
+  </details>
+
+  <details>
+    <summary>🎨 Super Fun Bonus Activities</summary>
+    <p>Extra fun things to do around Beijing!</p>
+    <label><input type="checkbox" data-id="kids-bonus-1"> Watch someone writing Chinese characters with a brush</label>
+    <label><input type="checkbox" data-id="kids-bonus-2"> Hear Chinese music or singing</label>
+    <label><input type="checkbox" data-id="kids-bonus-3"> See a street performer doing something cool</label>
+    <label><input type="checkbox" data-id="kids-bonus-4"> Find a statue of a lion or dragon</label>
+    <label><input type="checkbox" data-id="kids-bonus-5"> Use a phone to pay for something (like magic!)</label>
+    <label><input type="checkbox" data-id="kids-bonus-6"> Learn to say "Xie Xie" (thank you) in Chinese</label>
+  </details>
+
+  <script>
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      const id = cb.dataset.id;
+      cb.checked = localStorage.getItem(id) === 'true';
+      cb.addEventListener('change', () => {
+        localStorage.setItem(id, cb.checked);
+      });
+    });
+  </script>
+</body>
+</html>

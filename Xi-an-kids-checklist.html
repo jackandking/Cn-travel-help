@@ -1,0 +1,131 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Xi'an Kids Travel Checklist</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 1em;
+      max-width: 700px;
+      margin: auto;
+      background: #fefefe;
+    }
+    h1 {
+      text-align: center;
+      color: #ff6b6b;
+    }
+    nav {
+      margin-bottom: 2em;
+    }
+    nav a {
+      display: inline-block;
+      margin-right: 1em;
+      text-decoration: none;
+      color: #0366d6;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    details {
+      margin-bottom: 1em;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 0.5em;
+      background: #f9f9f9;
+    }
+    summary {
+      font-weight: bold;
+      font-size: 1.2em;
+      cursor: pointer;
+    }
+    label {
+      display: block;
+      margin: 0.5em 0;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧒 Xi'an Kids Adventure Checklist</h1>
+  <nav>
+    <a href="index.html">🏠 Home</a>
+  </nav>
+
+  <details>
+    <summary>🏺 Terracotta Warriors Discovery</summary>
+    <p>Meet the amazing clay soldiers that have been sleeping underground for thousands of years!</p>
+    <label><input type="checkbox" data-id="kids-warriors-1"> Count how many warriors you can see in one row</label>
+    <label><input type="checkbox" data-id="kids-warriors-2"> Find a warrior that looks different from the others</label>
+    <label><input type="checkbox" data-id="kids-warriors-3"> Pretend to be a warrior and strike a pose</label>
+    <label><input type="checkbox" data-id="kids-warriors-4"> Look for a warrior with a mustache or beard</label>
+  </details>
+
+  <details>
+    <summary>🏮 Ancient City Wall Adventure</summary>
+    <p>Walk or bike on top of the old city wall - it's like being on a giant castle!</p>
+    <label><input type="checkbox" data-id="kids-wall-1"> Walk or ride a bike on top of the wall</label>
+    <label><input type="checkbox" data-id="kids-wall-2"> Look down and see the city below</label>
+    <label><input type="checkbox" data-id="kids-wall-3"> Find a watchtower and explore inside</label>
+    <label><input type="checkbox" data-id="kids-wall-4"> Take a photo pretending to guard the city</label>
+  </details>
+
+  <details>
+    <summary>🏛️ Big Wild Goose Pagoda Quest</summary>
+    <p>Visit the tall ancient tower and learn about Buddhist monks!</p>
+    <label><input type="checkbox" data-id="kids-pagoda-1"> Count how many levels the pagoda has</label>
+    <label><input type="checkbox" data-id="kids-pagoda-2"> Find Buddha statues around the area</label>
+    <label><input type="checkbox" data-id="kids-pagoda-3"> Watch the dancing water fountain show</label>
+    <label><input type="checkbox" data-id="kids-pagoda-4"> Ring a temple bell if you find one</label>
+  </details>
+
+  <details>
+    <summary>🏺 Shaanxi History Museum Fun</summary>
+    <p>Discover ancient treasures and learn about old China!</p>
+    <label><input type="checkbox" data-id="kids-museum-1"> Find the oldest thing in the museum</label>
+    <label><input type="checkbox" data-id="kids-museum-2"> Spot ancient Chinese coins or money</label>
+    <label><input type="checkbox" data-id="kids-museum-3"> Find a display with ancient Chinese writing</label>
+    <label><input type="checkbox" data-id="kids-museum-4"> Take a photo next to your favorite artifact</label>
+  </details>
+
+  <details>
+    <summary>🥟 Xi'an Food Challenge</summary>
+    <p>Try the famous foods that Xi'an is known for!</p>
+    <label><input type="checkbox" data-id="kids-food-1"> Eat Xi'an noodles (they're really long and stretchy!)</label>
+    <label><input type="checkbox" data-id="kids-food-2"> Try roujiamo (Chinese hamburger)</label>
+    <label><input type="checkbox" data-id="kids-food-3"> Taste some spicy food (if you're brave!)</label>
+    <label><input type="checkbox" data-id="kids-food-4"> Watch noodles being made by hand</label>
+  </details>
+
+  <details>
+    <summary>🎭 Muslim Quarter Exploration</summary>
+    <p>Walk through the busy streets full of food and interesting shops!</p>
+    <label><input type="checkbox" data-id="kids-quarter-1"> Try a sweet snack or candy</label>
+    <label><input type="checkbox" data-id="kids-quarter-2"> Find a shop selling colorful things</label>
+    <label><input type="checkbox" data-id="kids-quarter-3"> Listen to the different sounds and music</label>
+    <label><input type="checkbox" data-id="kids-quarter-4"> Spot people wearing traditional clothes</label>
+  </details>
+
+  <details>
+    <summary>🎨 Bonus Xi'an Adventures</summary>
+    <p>Extra fun activities around the ancient city!</p>
+    <label><input type="checkbox" data-id="kids-bonus-1"> Find ancient Chinese characters carved in stone</label>
+    <label><input type="checkbox" data-id="kids-bonus-2"> See someone writing with a brush and ink</label>
+    <label><input type="checkbox" data-id="kids-bonus-3"> Find a lion statue guarding a building</label>
+    <label><input type="checkbox" data-id="kids-bonus-4"> Learn to say "Xi'an" correctly (Shee-ahn)</label>
+    <label><input type="checkbox" data-id="kids-bonus-5"> Spot a Chinese flag</label>
+    <label><input type="checkbox" data-id="kids-bonus-6"> Take a photo like an ancient Chinese emperor</label>
+  </details>
+
+  <script>
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      const id = cb.dataset.id;
+      cb.checked = localStorage.getItem(id) === 'true';
+      cb.addEventListener('change', () => {
+        localStorage.setItem(id, cb.checked);
+      });
+    });
+  </script>
+</body>
+</html>

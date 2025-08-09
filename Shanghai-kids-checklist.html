@@ -1,0 +1,131 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shanghai Kids Travel Checklist</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 1em;
+      max-width: 700px;
+      margin: auto;
+      background: #fefefe;
+    }
+    h1 {
+      text-align: center;
+      color: #ff6b6b;
+    }
+    nav {
+      margin-bottom: 2em;
+    }
+    nav a {
+      display: inline-block;
+      margin-right: 1em;
+      text-decoration: none;
+      color: #0366d6;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    details {
+      margin-bottom: 1em;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 0.5em;
+      background: #f9f9f9;
+    }
+    summary {
+      font-weight: bold;
+      font-size: 1.2em;
+      cursor: pointer;
+    }
+    label {
+      display: block;
+      margin: 0.5em 0;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧒 Shanghai Kids Adventure Checklist</h1>
+  <nav>
+    <a href="index.html">🏠 Home</a>
+  </nav>
+
+  <details>
+    <summary>🌆 The Bund River Adventure</summary>
+    <p>Walk along the famous river and see the amazing city lights!</p>
+    <label><input type="checkbox" data-id="kids-bund-1"> Count how many tall buildings you can see</label>
+    <label><input type="checkbox" data-id="kids-bund-2"> Find a building that looks like it's from the future</label>
+    <label><input type="checkbox" data-id="kids-bund-3"> Take a photo with the river behind you</label>
+    <label><input type="checkbox" data-id="kids-bund-4"> Watch a boat go by on the river</label>
+  </details>
+
+  <details>
+    <summary>🗼 Super Tall Tower Fun</summary>
+    <p>Go up really high and see the whole city from above!</p>
+    <label><input type="checkbox" data-id="kids-tower-1"> Ride in a super fast elevator</label>
+    <label><input type="checkbox" data-id="kids-tower-2"> Look down and find cars that look like toys</label>
+    <label><input type="checkbox" data-id="kids-tower-3"> Take a photo through the big windows</label>
+    <label><input type="checkbox" data-id="kids-tower-4"> Find the Oriental Pearl Tower (it looks like a space rocket!)</label>
+  </details>
+
+  <details>
+    <summary>🛍️ Shopping Street Treasure Hunt</summary>
+    <p>Walk down the busy shopping street and discover cool things!</p>
+    <label><input type="checkbox" data-id="kids-shopping-1"> Find a toy store</label>
+    <label><input type="checkbox" data-id="kids-shopping-2"> Count how many colorful signs you can see</label>
+    <label><input type="checkbox" data-id="kids-shopping-3"> Listen for different languages being spoken</label>
+    <label><input type="checkbox" data-id="kids-shopping-4"> Find a store with Chinese writing on it</label>
+  </details>
+
+  <details>
+    <summary>🏮 Yu Garden Magic</summary>
+    <p>Explore the beautiful traditional Chinese garden!</p>
+    <label><input type="checkbox" data-id="kids-garden-1"> Find a bridge to walk across</label>
+    <label><input type="checkbox" data-id="kids-garden-2"> Spot a fish swimming in a pond</label>
+    <label><input type="checkbox" data-id="kids-garden-3"> Find a pagoda (traditional Chinese tower)</label>
+    <label><input type="checkbox" data-id="kids-garden-4"> Take a photo next to Chinese decorations</label>
+  </details>
+
+  <details>
+    <summary>🥟 Shanghai Food Adventure</summary>
+    <p>Taste the special foods that Shanghai is famous for!</p>
+    <label><input type="checkbox" data-id="kids-food-1"> Try soup dumplings (xiaolongbao) - be careful, they're hot!</label>
+    <label><input type="checkbox" data-id="kids-food-2"> Eat something sweet like a Chinese pastry</label>
+    <label><input type="checkbox" data-id="kids-food-3"> Try bubble tea or a fun Chinese drink</label>
+    <label><input type="checkbox" data-id="kids-food-4"> Use chopsticks to pick up noodles</label>
+  </details>
+
+  <details>
+    <summary>🚄 Super Speed Train Fun</summary>
+    <p>Ride on one of the world's fastest trains!</p>
+    <label><input type="checkbox" data-id="kids-train-1"> Ride the Maglev train (it floats on magnets!)</label>
+    <label><input type="checkbox" data-id="kids-train-2"> Watch the speed meter go really fast</label>
+    <label><input type="checkbox" data-id="kids-train-3"> Look out the window and see everything zoom by</label>
+    <label><input type="checkbox" data-id="kids-train-4"> Take a selfie on the super cool train</label>
+  </details>
+
+  <details>
+    <summary>🎨 Bonus Shanghai Discoveries</summary>
+    <p>Extra fun activities around the city!</p>
+    <label><input type="checkbox" data-id="kids-bonus-1"> Find street art or colorful murals</label>
+    <label><input type="checkbox" data-id="kids-bonus-2"> See traditional Chinese clothes in a shop</label>
+    <label><input type="checkbox" data-id="kids-bonus-3"> Watch people doing tai chi in a park</label>
+    <label><input type="checkbox" data-id="kids-bonus-4"> Find a red Chinese lantern</label>
+    <label><input type="checkbox" data-id="kids-bonus-5"> Learn to count to 5 in Chinese</label>
+    <label><input type="checkbox" data-id="kids-bonus-6"> Take a boat ride on the river</label>
+  </details>
+
+  <script>
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      const id = cb.dataset.id;
+      cb.checked = localStorage.getItem(id) === 'true';
+      cb.addEventListener('change', () => {
+        localStorage.setItem(id, cb.checked);
+      });
+    });
+  </script>
+</body>
+</html>
