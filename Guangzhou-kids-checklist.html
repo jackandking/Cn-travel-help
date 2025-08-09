@@ -1,0 +1,140 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guangzhou Kids Travel Checklist</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 1em;
+      max-width: 700px;
+      margin: auto;
+      background: #fefefe;
+    }
+    h1 {
+      text-align: center;
+      color: #ff6b6b;
+    }
+    nav {
+      margin-bottom: 2em;
+    }
+    nav a {
+      display: inline-block;
+      margin-right: 1em;
+      text-decoration: none;
+      color: #0366d6;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    details {
+      margin-bottom: 1em;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 0.5em;
+      background: #f9f9f9;
+    }
+    summary {
+      font-weight: bold;
+      font-size: 1.2em;
+      cursor: pointer;
+    }
+    label {
+      display: block;
+      margin: 0.5em 0;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧒 Guangzhou Kids Adventure Checklist</h1>
+  <nav>
+    <a href="index.html">🏠 Home</a>
+  </nav>
+
+  <details>
+    <summary>🗼 Canton Tower Fun</summary>
+    <p>Visit the twisty tower that looks like it's dancing! It's nicknamed "Little Waist"!</p>
+    <label><input type="checkbox" data-id="kids-tower-1"> Ride the super fast elevator to the top</label>
+    <label><input type="checkbox" data-id="kids-tower-2"> Look down and find the Pearl River</label>
+    <label><input type="checkbox" data-id="kids-tower-3"> See the tower change colors at night</label>
+    <label><input type="checkbox" data-id="kids-tower-4"> Take a photo pretending to hug the tower</label>
+  </details>
+
+  <details>
+    <summary>🐼 Chimelong Safari Adventure</summary>
+    <p>Meet amazing animals from around the world in this huge zoo!</p>
+    <label><input type="checkbox" data-id="kids-safari-1"> See real pandas eating bamboo</label>
+    <label><input type="checkbox" data-id="kids-safari-2"> Watch elephants taking a bath</label>
+    <label><input type="checkbox" data-id="kids-safari-3"> Take a safari bus ride to see lions</label>
+    <label><input type="checkbox" data-id="kids-safari-4"> Count how many different animals you can spot</label>
+  </details>
+
+  <details>
+    <summary>🏮 Chen Clan Temple Discovery</summary>
+    <p>Explore the beautiful traditional Chinese temple with amazing decorations!</p>
+    <label><input type="checkbox" data-id="kids-temple-1"> Find dragons carved in the walls</label>
+    <label><input type="checkbox" data-id="kids-temple-2"> Spot colorful roof decorations</label>
+    <label><input type="checkbox" data-id="kids-temple-3"> Find a courtyard with plants</label>
+    <label><input type="checkbox" data-id="kids-temple-4"> Take a photo next to Chinese art</label>
+  </details>
+
+  <details>
+    <summary>🌸 Yuexiu Park Nature Hunt</summary>
+    <p>Play in the big park and find the famous Five Rams statue!</p>
+    <label><input type="checkbox" data-id="kids-park-1"> Find the Five Rams statue (five stone goats!)</label>
+    <label><input type="checkbox" data-id="kids-park-2"> Climb to the top of Zhenhai Tower</label>
+    <label><input type="checkbox" data-id="kids-park-3"> Feed fish in the lake</label>
+    <label><input type="checkbox" data-id="kids-park-4"> Run around and play on the grass</label>
+  </details>
+
+  <details>
+    <summary>🥟 Cantonese Food Adventure</summary>
+    <p>Try the famous foods from Guangzhou - they're really yummy!</p>
+    <label><input type="checkbox" data-id="kids-food-1"> Eat dim sum (tiny dishes of food)</label>
+    <label><input type="checkbox" data-id="kids-food-2"> Try sweet and sour pork</label>
+    <label><input type="checkbox" data-id="kids-food-3"> Drink milk tea or a sweet Chinese drink</label>
+    <label><input type="checkbox" data-id="kids-food-4"> Use chopsticks to eat rice</label>
+  </details>
+
+  <details>
+    <summary>🛍️ Beijing Road Shopping Fun</summary>
+    <p>Walk down the busy street and discover cool things to see and do!</p>
+    <label><input type="checkbox" data-id="kids-shopping-1"> Find a toy store with fun Chinese toys</label>
+    <label><input type="checkbox" data-id="kids-shopping-2"> Look through the glass floor to see old streets below</label>
+    <label><input type="checkbox" data-id="kids-shopping-3"> Count colorful shop signs</label>
+    <label><input type="checkbox" data-id="kids-shopping-4"> Try a street snack</label>
+  </details>
+
+  <details>
+    <summary>⛵ Pearl River Boat Trip</summary>
+    <p>Take a fun boat ride on the river and see the city from the water!</p>
+    <label><input type="checkbox" data-id="kids-river-1"> Ride a boat on the Pearl River</label>
+    <label><input type="checkbox" data-id="kids-river-2"> Wave at people on other boats</label>
+    <label><input type="checkbox" data-id="kids-river-3"> See the city lights reflected in the water</label>
+    <label><input type="checkbox" data-id="kids-river-4"> Take a photo of the Canton Tower from the river</label>
+  </details>
+
+  <details>
+    <summary>🎨 Bonus Guangzhou Discoveries</summary>
+    <p>Extra fun activities around the flower city!</p>
+    <label><input type="checkbox" data-id="kids-bonus-1"> Find beautiful flowers in the city (it's called Flower City!)</label>
+    <label><input type="checkbox" data-id="kids-bonus-2"> Learn to say "Guangzhou" correctly (Gwong-joe)</label>
+    <label><input type="checkbox" data-id="kids-bonus-3"> Spot Cantonese writing on signs</label>
+    <label><input type="checkbox" data-id="kids-bonus-4"> Find a statue or decoration of a ram/goat</label>
+    <label><input type="checkbox" data-id="kids-bonus-5"> Watch people doing morning exercises in the park</label>
+    <label><input type="checkbox" data-id="kids-bonus-6"> Learn to say "hello" in Cantonese</label>
+  </details>
+
+  <script>
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      const id = cb.dataset.id;
+      cb.checked = localStorage.getItem(id) === 'true';
+      cb.addEventListener('change', () => {
+        localStorage.setItem(id, cb.checked);
+      });
+    });
+  </script>
+</body>
+</html>
