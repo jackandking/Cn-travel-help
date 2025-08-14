@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Allow all search engines to crawl all pages
+Disallow: 
+
+# Sitemap location
+Sitemap: https://cn-travel-help.cn/sitemap.xml
+Sitemap: https://jackandking.github.io/Cn-travel-help/sitemap.xml
