@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wuzhen Travel Checklist 2025 - Ancient Water Town & Canal Experience Guide | China Travel Help</title>
+  <meta name="description" content="Interactive Wuzhen travel checklist covering ancient water town attractions, traditional bridges, canal boat rides, and essential tips for exploring China's most famous water town.">
+  <meta name="keywords" content="Wuzhen travel checklist, Wuzhen travel guide, Wuzhen water town, ancient water town China, Wuzhen attractions, Zhejiang travel, canal boat rides Wuzhen, traditional Chinese architecture">
+  <meta name="author" content="China Travel Help">
+  <link rel="canonical" href="https://cn-travel-help.cn/Wuzhen-travel-checklist.html">
+  
+  <!-- Open Graph Meta Tags for Social Sharing -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Wuzhen Travel Checklist 2025 - Ancient Water Town & Canal Experience Guide">
+  <meta property="og:description" content="Interactive Wuzhen travel checklist covering ancient water town attractions, traditional bridges, and essential tips for exploring China's most famous water town.">
+  <meta property="og:url" content="https://cn-travel-help.cn/Wuzhen-travel-checklist.html">
+  <meta property="og:site_name" content="China Travel Help">
+  <meta property="og:locale" content="en_US">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Wuzhen Travel Checklist 2025 - Ancient Water Town Guide">
+  <meta name="twitter:description" content="Interactive Wuzhen travel checklist covering ancient water town and canal boat rides.">
+  
+  <!-- Additional SEO Meta Tags -->
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0066cc">
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 1em;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      margin-bottom: 0.5em;
+    }
+    nav {
+      margin-bottom: 2em;
+    }
+    nav a {
+      display: inline-block;
+      margin-right: 1em;
+      text-decoration: none;
+      color: #0366d6;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    li {
+      margin: 0.5em 0;
+    }
+    label {
+      cursor: pointer;
+    }
+    #saveBtn {
+      background: #28a745;
+      color: white;
+      padding: 0.5em 1em;
+      border: none;
+      cursor: pointer;
+      margin-bottom: 1em;
+    }
+    #saveBtn:hover {
+      background: #218838;
+    }
+    footer {
+      margin-top: 2em;
+      text-align: center;
+      font-size: 0.9em;
+      color: #666;
+    }
+    footer nav a {
+      color: #666;
+      margin: 0 0.5em;
+    }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QEBJRV187V"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QEBJRV187V');
+  </script>
+</head>
+<body>
+  <h1>🏮 Wuzhen Travel Checklist</h1>
+  <nav>
+    <a href="index.html">🏠 Home</a>
+  </nav>
+  <p>Welcome to your comprehensive Wuzhen travel checklist! Check off each item as you prepare for your journey to China's most famous ancient water town.</p>
+  <button id="saveBtn" onclick="saveChecklist()">Save Progress</button>
+  <ul id="checklist">
+    <li><input type="checkbox" id="passport"><label for="passport">Passport and visa for China</label></li>
+    <li><input type="checkbox" id="transport"><label for="transport">Transportation to Wuzhen (high-speed train to Tongxiang or bus from Shanghai/Hangzhou)</label></li>
+    <li><input type="checkbox" id="accommodation"><label for="accommodation">Accommodation booking (traditional guesthouse or modern hotel)</label></li>
+    <li><input type="checkbox" id="tickets"><label for="tickets">Entrance tickets for Wuzhen Scenic Area (East and West sections)</label></li>
+    <li><input type="checkbox" id="apps"><label for="apps">Download translation and map apps (Baidu Maps, Google Translate)</label></li>
+    <li><input type="checkbox" id="cash"><label for="cash">Cash (RMB) and bank cards (ensure international access)</label></li>
+    <li><input type="checkbox" id="insurance"><label for="insurance">Emergency contacts and travel insurance</label></li>
+    <li><input type="checkbox" id="sites"><label for="sites">Plan visits to: Ancient Stone Bridges, Traditional Workshops, Canal Boat Rides, Folk Custom Museum</label></li>
+    <li><input type="checkbox" id="clothing"><label for="clothing">Comfortable walking shoes and weather-appropriate clothing</label></li>
+    <li><input type="checkbox" id="adapter"><label for="adapter">Power adapter for China (Type A, C, or I)</label></li>
+    <li><input type="checkbox" id="snacks"><label for="snacks">Water bottle and local currency for traditional snacks</label></li>
+    <li><input type="checkbox" id="health"><label for="health">Health items: masks, hand sanitizer, medicine</label></li>
+    <li><input type="checkbox" id="idcopies"><label for="idcopies">Personal identification and copies</label></li>
+    <li><input type="checkbox" id="sim"><label for="sim">Local SIM card or international roaming plan</label></li>
+    <li><input type="checkbox" id="camera"><label for="camera">Camera/phone and chargers for capturing the scenic water town</label></li>
+  </ul>
+  <p>Safe travels and enjoy your adventure in the beautiful water town of Wuzhen!</p>
+  
+  <footer>
+    <nav>
+      <a href="about.html">About Us</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms-of-service.html">Terms of Service</a>
+      <a href="contact.html">Contact</a>
+      <a href="feedback.html">💬 Feedback</a>
+    </nav>
+    <p>&copy; 2025 China Travel Help. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Restore checklist state from localStorage
+    window.onload = function() {
+      const saved = JSON.parse(localStorage.getItem('wuzhenChecklist') || '{}');
+      for (const id in saved) {
+        const checkbox = document.getElementById(id);
+        if (checkbox) checkbox.checked = saved[id];
+      }
+    };
+
+    // Save checklist state to localStorage
+    function saveChecklist() {
+      const ids = [
+        'passport', 'transport', 'accommodation', 'tickets', 'apps', 'cash',
+        'insurance', 'sites', 'clothing', 'adapter', 'snacks',
+        'health', 'idcopies', 'sim', 'camera'
+      ];
+      const state = {};
+      ids.forEach(id => {
+        const checkbox = document.getElementById(id);
+        if (checkbox) state[id] = checkbox.checked;
+      });
+      localStorage.setItem('wuzhenChecklist', JSON.stringify(state));
+      alert('Checklist progress saved locally!');
+    }
+  </script>
+</body>
+</html>
