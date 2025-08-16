@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jiaxing Travel Checklist 2025 - Ancient Lakes & Revolutionary History Guide | China Travel Help</title>
+  <meta name="description" content="Interactive Jiaxing travel checklist covering Nanhu Lake, Xitang Ancient Town, traditional zongzi cuisine, and essential tips for exploring this historic Zhejiang city.">
+  <meta name="keywords" content="Jiaxing travel checklist, Jiaxing travel guide, Nanhu Lake, Xitang Ancient Town, Jiaxing attractions, Zhejiang travel, Jiaxing zongzi, traditional Chinese cuisine">
+  <meta name="author" content="China Travel Help">
+  <link rel="canonical" href="https://cn-travel-help.cn/Jiaxing-travel-checklist.html">
+  
+  <!-- Open Graph Meta Tags for Social Sharing -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Jiaxing Travel Checklist 2025 - Ancient Lakes & Revolutionary History Guide">
+  <meta property="og:description" content="Interactive Jiaxing travel checklist covering Nanhu Lake, Xitang Ancient Town, and essential tips for exploring this historic Zhejiang city.">
+  <meta property="og:url" content="https://cn-travel-help.cn/Jiaxing-travel-checklist.html">
+  <meta property="og:site_name" content="China Travel Help">
+  <meta property="og:locale" content="en_US">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Jiaxing Travel Checklist 2025 - Ancient Lakes & Revolutionary History Guide">
+  <meta name="twitter:description" content="Interactive Jiaxing travel checklist covering Nanhu Lake and Xitang Ancient Town.">
+  
+  <!-- Additional SEO Meta Tags -->
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0066cc">
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 1em;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      margin-bottom: 0.5em;
+    }
+    nav {
+      margin-bottom: 2em;
+    }
+    nav a {
+      display: inline-block;
+      margin-right: 1em;
+      text-decoration: none;
+      color: #0366d6;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    li {
+      margin: 0.5em 0;
+    }
+    label {
+      cursor: pointer;
+    }
+    #saveBtn {
+      background: #28a745;
+      color: white;
+      padding: 0.5em 1em;
+      border: none;
+      cursor: pointer;
+      margin-bottom: 1em;
+    }
+    #saveBtn:hover {
+      background: #218838;
+    }
+    footer {
+      margin-top: 2em;
+      text-align: center;
+      font-size: 0.9em;
+      color: #666;
+    }
+    footer nav a {
+      color: #666;
+      margin: 0 0.5em;
+    }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QEBJRV187V"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QEBJRV187V');
+  </script>
+</head>
+<body>
+  <h1>🏞️ Jiaxing Travel Checklist</h1>
+  <nav>
+    <a href="index.html">🏠 Home</a>
+  </nav>
+  <p>Welcome to your comprehensive Jiaxing travel checklist! Check off each item as you prepare for your journey to this historic city in Zhejiang province, famous for Nanhu Lake and revolutionary history.</p>
+  <button id="saveBtn" onclick="saveChecklist()">Save Progress</button>
+  <ul id="checklist">
+    <li><input type="checkbox" id="passport"><label for="passport">Passport and visa for China</label></li>
+    <li><input type="checkbox" id="transport"><label for="transport">Transportation to Jiaxing (high-speed train from Shanghai/Hangzhou or bus)</label></li>
+    <li><input type="checkbox" id="accommodation"><label for="accommodation">Accommodation booking (hotel near Nanhu Lake or city center)</label></li>
+    <li><input type="checkbox" id="tickets"><label for="tickets">Entrance tickets for Nanhu Lake Scenic Area and memorial sites</label></li>
+    <li><input type="checkbox" id="apps"><label for="apps">Download translation and map apps (Baidu Maps, Google Translate)</label></li>
+    <li><input type="checkbox" id="cash"><label for="cash">Cash (RMB) and bank cards (ensure international access)</label></li>
+    <li><input type="checkbox" id="insurance"><label for="insurance">Emergency contacts and travel insurance</label></li>
+    <li><input type="checkbox" id="sites"><label for="sites">Plan visits to: Nanhu Lake, Red Boat Memorial, Xitang Ancient Town, Jiaxing Museum, Local Food Streets</label></li>
+    <li><input type="checkbox" id="clothing"><label for="clothing">Comfortable walking shoes and weather-appropriate clothing</label></li>
+    <li><input type="checkbox" id="adapter"><label for="adapter">Power adapter for China (Type A, C, or I)</label></li>
+    <li><input type="checkbox" id="snacks"><label for="snacks">Water bottle and appetite for famous Jiaxing zongzi (rice dumplings)</label></li>
+    <li><input type="checkbox" id="health"><label for="health">Health items: masks, hand sanitizer, medicine</label></li>
+    <li><input type="checkbox" id="idcopies"><label for="idcopies">Personal identification and copies</label></li>
+    <li><input type="checkbox" id="sim"><label for="sim">Local SIM card or international roaming plan</label></li>
+    <li><input type="checkbox" id="camera"><label for="camera">Camera/phone and chargers for capturing lake scenery and historic sites</label></li>
+  </ul>
+  <p>Safe travels and enjoy your adventure in beautiful Jiaxing!</p>
+  
+  <footer>
+    <nav>
+      <a href="about.html">About Us</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms-of-service.html">Terms of Service</a>
+      <a href="contact.html">Contact</a>
+      <a href="feedback.html">💬 Feedback</a>
+    </nav>
+    <p>&copy; 2025 China Travel Help. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Restore checklist state from localStorage
+    window.onload = function() {
+      const saved = JSON.parse(localStorage.getItem('jiaxingChecklist') || '{}');
+      for (const id in saved) {
+        const checkbox = document.getElementById(id);
+        if (checkbox) checkbox.checked = saved[id];
+      }
+    };
+
+    // Save checklist state to localStorage
+    function saveChecklist() {
+      const ids = [
+        'passport', 'transport', 'accommodation', 'tickets', 'apps', 'cash',
+        'insurance', 'sites', 'clothing', 'adapter', 'snacks',
+        'health', 'idcopies', 'sim', 'camera'
+      ];
+      const state = {};
+      ids.forEach(id => {
+        const checkbox = document.getElementById(id);
+        if (checkbox) state[id] = checkbox.checked;
+      });
+      localStorage.setItem('jiaxingChecklist', JSON.stringify(state));
+      alert('Checklist progress saved locally!');
+    }
+  </script>
+</body>
+</html>
