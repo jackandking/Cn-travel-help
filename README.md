@@ -24,6 +24,7 @@ Welcome to **China Travel Help** – a lightweight, interactive set of travel ch
 - [Xi'an Travel Checklist](Xi-an-travel-checklist.html) & [🧒 Xi'an Kids Checklist](Xi-an-kids-checklist.html)
 - [Guangzhou Travel Checklist](Guangzhou-travel-checklist.html) & [🧒 Guangzhou Kids Checklist](Guangzhou-kids-checklist.html)
 - [Chengdu Travel Checklist](Chengdu-travel-checklist.html) & [🧒 Chengdu Kids Checklist](Chengdu-kids-checklist.html)
+- [Chongqing Travel Checklist](Chongqing-travel-checklist.html) & [🧒 Chongqing Kids Checklist](Chongqing-kids-checklist.html)
 - [Hangzhou Travel Checklist](Hangzhou-travel-checklist.html) & [🧒 Hangzhou Kids Checklist](Hangzhou-kids-checklist.html)
 - [Nanjing Travel Checklist](Nanjing-travel-checklist.html) & [🧒 Nanjing Kids Checklist](Nanjing-kids-checklist.html)
 - [Jiaxing Travel Checklist](Jiaxing-travel-checklist.html) & [🧒 Jiaxing Kids Checklist](Jiaxing-kids-checklist.html)
