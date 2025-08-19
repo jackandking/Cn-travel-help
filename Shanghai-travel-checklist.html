@@ -29,6 +29,49 @@
     h1 { color: #0077aa; }
     label { display: block; margin-bottom: 0.5em; }
     input[type="checkbox"] { margin-right: 0.5em; }
+    .social-sharing {
+      background: #f8f9fa;
+      padding: 1.5em;
+      border-radius: 8px;
+      text-align: center;
+      margin: 2em 0;
+      border: 1px solid #dee2e6;
+    }
+    .social-sharing h3 {
+      color: #0077aa;
+      margin-bottom: 0.5em;
+      font-size: 1.1em;
+    }
+    .social-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5em;
+      justify-content: center;
+      align-items: center;
+    }
+    .social-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3em;
+      padding: 0.5em 1em;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      border: none;
+      font-size: 0.85em;
+    }
+    .social-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      text-decoration: none;
+    }
+    .social-button.facebook { background: #1877f2; color: white; }
+    .social-button.twitter { background: #1da1f2; color: white; }
+    .social-button.wechat { background: #07c160; color: white; }
+    .social-button.copy { background: #6c757d; color: white; }
+    .social-button.copy.copied { background: #28a745; }
   </style>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -65,6 +108,63 @@
   <label><input type="checkbox" id="frenchConcession">Former French Concession</label>  <h2>🍜 Local Experiences</h2>
   <label><input type="checkbox" id="dumplings">Eat soup dumplings (Xiaolongbao)</label>
   <label><input type="checkbox" id="huangpuCruise">Huangpu River Cruise</label>
-  <label><input type="checkbox" id="maglev">Take the Maglev train</label>  <p><a href="index.html">⬅️ Back to Home</a> | <a href="Shanghai-kids-checklist.html">🧒 Shanghai for Kids</a> | <a href="China-travel-checklist.html">🇨🇳 China Guide</a></p>
+  <label><input type="checkbox" id="maglev">Take the Maglev train</label>
+
+  <div class="social-sharing">
+    <h3>📱 Share This Shanghai Guide</h3>
+    <p>Help others explore Shanghai!</p>
+    <div class="social-buttons">
+      <button class="social-button facebook" onclick="shareOnFacebook()">📘 Facebook</button>
+      <button class="social-button twitter" onclick="shareOnTwitter()">🐦 Twitter</button>
+      <button class="social-button wechat" onclick="shareOnWeChat()">💬 WeChat</button>
+      <button class="social-button copy" id="copyButton" onclick="copyLink()">🔗 Copy Link</button>
+    </div>
+  </div>
+
+  <p><a href="index.html">⬅️ Back to Home</a> | <a href="Shanghai-kids-checklist.html">🧒 Shanghai for Kids</a> | <a href="China-travel-checklist.html">🇨🇳 China Guide</a></p>
+
+  <script>
+    function shareOnFacebook() {
+      const url = encodeURIComponent(window.location.href);
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, 'facebook-share-dialog', 'width=626,height=436');
+    }
+
+    function shareOnTwitter() {
+      const url = encodeURIComponent(window.location.href);
+      const text = encodeURIComponent('Check out this comprehensive Shanghai travel checklist! 🏙️✨');
+      window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, 'twitter-share-dialog', 'width=550,height=235');
+    }
+
+    function shareOnWeChat() {
+      copyLink();
+      alert('📱 Link copied! Open WeChat and paste the link to share with friends.');
+    }
+
+    function copyLink() {
+      const copyButton = document.getElementById('copyButton');
+      navigator.clipboard.writeText(window.location.href).then(function() {
+        copyButton.textContent = '✅ Copied!';
+        copyButton.classList.add('copied');
+        setTimeout(function() {
+          copyButton.textContent = '🔗 Copy Link';
+          copyButton.classList.remove('copied');
+        }, 2000);
+      }, function(err) {
+        const textArea = document.createElement('textarea');
+        textArea.value = window.location.href;
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        copyButton.textContent = '✅ Copied!';
+        copyButton.classList.add('copied');
+        setTimeout(function() {
+          copyButton.textContent = '🔗 Copy Link';
+          copyButton.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
 </body>
 </html>
