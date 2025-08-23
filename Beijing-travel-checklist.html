@@ -77,21 +77,66 @@
       text-decoration: underline;
     }
     details {
-      margin-bottom: 1em;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      padding: 0.5em;
-      background: #f9f9f9;
+      margin-bottom: 1.5em;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 1em;
+      background: linear-gradient(135deg, #fff 0%, #f8f9ff 100%);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    details:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+    details[open] {
+      background: linear-gradient(135deg, #fff 0%, #f0f8ff 100%);
+      border-color: #0366d6;
     }
     summary {
       font-weight: bold;
-      font-size: 1.2em;
+      font-size: 1.3em;
       cursor: pointer;
+      padding: 0.5em 0;
+      color: #2c3e50;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
     }
+    summary:hover {
+      color: #0366d6;
+    }
+    summary::before {
+      content: '🏛️';
+      font-size: 1.2em;
+    }
+    details:nth-child(2) summary::before { content: '🏛️'; } /* Forbidden City */
+    details:nth-child(3) summary::before { content: '⛩️'; } /* Temple of Heaven */
+    details:nth-child(4) summary::before { content: '🏰'; } /* Great Wall */
+    details:nth-child(5) summary::before { content: '🏮'; } /* Hutongs */
+    details:nth-child(6) summary::before { content: '🥟'; } /* Food */
+    details:nth-child(7) summary::before { content: '🎯'; } /* Bonus */
     label {
-      display: block;
-      margin: 0.5em 0;
+      display: flex;
+      align-items: center;
+      margin: 0.8em 0;
       cursor: pointer;
+      padding: 0.5em 0.8em;
+      border-radius: 6px;
+      transition: background-color 0.2s ease;
+      font-size: 0.95em;
+      line-height: 1.4;
+    }
+    label:hover {
+      background-color: rgba(3, 102, 214, 0.05);
+    }
+    label input[type="checkbox"] {
+      margin-right: 0.8em;
+      transform: scale(1.1);
+    }
+    .attraction-icon {
+      margin-right: 0.5em;
+      font-size: 1.1em;
     }
     .social-sharing {
       background: white;
@@ -178,47 +223,47 @@
   </nav>  <details>
     <summary>1. The Forbidden City (故宫)</summary>
     <p>Explore the largest ancient imperial palace in the world. Imagine you're an emperor walking through the red walls and golden roofs.</p>
-    <label><input type="checkbox" data-id="forbidden-1"> Enter through the Meridian Gate (午门)</label>
-    <label><input type="checkbox" data-id="forbidden-2"> Find a dragon decoration (hint: look up!)</label>
-    <label><input type="checkbox" data-id="forbidden-3"> Take a photo in front of the Hall of Supreme Harmony</label>
-    <label><input type="checkbox" data-id="forbidden-4"> Find the characters “故宫博物院” and learn how to say them</label>
+    <label><input type="checkbox" data-id="forbidden-1"> <span class="attraction-icon">🚪</span>Enter through the Meridian Gate (午门)</label>
+    <label><input type="checkbox" data-id="forbidden-2"> <span class="attraction-icon">🐲</span>Find a dragon decoration (hint: look up!)</label>
+    <label><input type="checkbox" data-id="forbidden-3"> <span class="attraction-icon">📸</span>Take a photo in front of the Hall of Supreme Harmony</label>
+    <label><input type="checkbox" data-id="forbidden-4"> <span class="attraction-icon">📝</span>Find the characters “故宫博物院” and learn how to say them</label>
   </details>  <details>
     <summary>2. Temple of Heaven (天坛)</summary>
     <p>Ancient emperors prayed here for good harvests. The architecture is full of cosmic symbols.</p>
-    <label><input type="checkbox" data-id="temple-1"> Clap your hands in the Echo Wall area</label>
-    <label><input type="checkbox" data-id="temple-2"> Find the Hall of Prayer for Good Harvests</label>
-    <label><input type="checkbox" data-id="temple-3"> Observe local people dancing or doing tai chi</label>
-    <label><input type="checkbox" data-id="temple-4"> Try saying “Tiāntán” in Chinese!</label>
+    <label><input type="checkbox" data-id="temple-1"> <span class="attraction-icon">👏</span>Clap your hands in the Echo Wall area</label>
+    <label><input type="checkbox" data-id="temple-2"> <span class="attraction-icon">🏛️</span>Find the Hall of Prayer for Good Harvests</label>
+    <label><input type="checkbox" data-id="temple-3"> <span class="attraction-icon">🧘</span>Observe local people dancing or doing tai chi</label>
+    <label><input type="checkbox" data-id="temple-4"> <span class="attraction-icon">🗣️</span>Try saying “Tiāntán” in Chinese!</label>
   </details>  <details>
     <summary>3. Great Wall (长城)</summary>
     <p>One of the Seven Wonders of the World. It’s said that "You're not a true hero until you climb the Great Wall."</p>
-    <label><input type="checkbox" data-id="wall-1"> Climb at least 100 steps</label>
-    <label><input type="checkbox" data-id="wall-2"> Take a panorama photo from a watchtower</label>
-    <label><input type="checkbox" data-id="wall-3"> Look for the phrase “不到长城非好汉” and learn what it means</label>
-    <label><input type="checkbox" data-id="wall-4"> High five someone who made it to the top</label>
+    <label><input type="checkbox" data-id="wall-1"> <span class="attraction-icon">🚶</span>Climb at least 100 steps</label>
+    <label><input type="checkbox" data-id="wall-2"> <span class="attraction-icon">📷</span>Take a panorama photo from a watchtower</label>
+    <label><input type="checkbox" data-id="wall-3"> <span class="attraction-icon">👀</span>Look for the phrase “不到长城非好汉” and learn what it means</label>
+    <label><input type="checkbox" data-id="wall-4"> <span class="attraction-icon">🙌</span>High five someone who made it to the top</label>
   </details>  <details>
     <summary>4. Hutongs (胡同) and Local Life</summary>
     <p>These narrow alleys are full of Beijing’s traditional life and hidden gems.</p>
-    <label><input type="checkbox" data-id="hutong-1"> Visit a local courtyard (四合院)</label>
-    <label><input type="checkbox" data-id="hutong-2"> Talk to a local or say “你好！”</label>
-    <label><input type="checkbox" data-id="hutong-3"> Try a rickshaw ride</label>
-    <label><input type="checkbox" data-id="hutong-4"> Find a door with red lanterns</label>
+    <label><input type="checkbox" data-id="hutong-1"> <span class="attraction-icon">🏠</span>Visit a local courtyard (四合院)</label>
+    <label><input type="checkbox" data-id="hutong-2"> <span class="attraction-icon">👋</span>Talk to a local or say “你好！”</label>
+    <label><input type="checkbox" data-id="hutong-3"> <span class="attraction-icon">🛺</span>Try a rickshaw ride</label>
+    <label><input type="checkbox" data-id="hutong-4"> <span class="attraction-icon">🏮</span>Find a door with red lanterns</label>
   </details>  <details>
     <summary>5. Food Adventure</summary>
     <p>Beijing food is full of history, flavor, and surprises!</p>
-    <label><input type="checkbox" data-id="food-1"> Eat Peking Duck 🦆</label>
-    <label><input type="checkbox" data-id="food-2"> Try jianbing (煎饼) or baozi (包子)</label>
-    <label><input type="checkbox" data-id="food-3"> Drink hot soy milk or sour plum soup</label>
-    <label><input type="checkbox" data-id="food-4"> Learn to use chopsticks like a local</label>
+    <label><input type="checkbox" data-id="food-1"> <span class="attraction-icon">🦆</span>Eat Peking Duck 🦆</label>
+    <label><input type="checkbox" data-id="food-2"> <span class="attraction-icon">🥞</span>Try jianbing (煎饼) or baozi (包子)</label>
+    <label><input type="checkbox" data-id="food-3"> <span class="attraction-icon">🥛</span>Drink hot soy milk or sour plum soup</label>
+    <label><input type="checkbox" data-id="food-4"> <span class="attraction-icon">🥢</span>Learn to use chopsticks like a local</label>
   </details>  <details>
     <summary>🎯 Bonus: Cultural Bingo</summary>
     <p>Try to complete at least 3 of these!</p>
-    <label><input type="checkbox" data-id="bonus-1"> See someone doing calligraphy</label>
-    <label><input type="checkbox" data-id="bonus-2"> Hear a Beijing accent</label>
-    <label><input type="checkbox" data-id="bonus-3"> Watch a street performance</label>
-    <label><input type="checkbox" data-id="bonus-4"> Spot a lion statue</label>
-    <label><input type="checkbox" data-id="bonus-5"> Use WeChat Pay</label>
-    <label><input type="checkbox" data-id="bonus-6"> Learn how to say “thank you” in Chinese</label>
+    <label><input type="checkbox" data-id="bonus-1"> <span class="attraction-icon">✍️</span>See someone doing calligraphy</label>
+    <label><input type="checkbox" data-id="bonus-2"> <span class="attraction-icon">👂</span>Hear a Beijing accent</label>
+    <label><input type="checkbox" data-id="bonus-3"> <span class="attraction-icon">🎭</span>Watch a street performance</label>
+    <label><input type="checkbox" data-id="bonus-4"> <span class="attraction-icon">🦁</span>Spot a lion statue</label>
+    <label><input type="checkbox" data-id="bonus-5"> <span class="attraction-icon">💳</span>Use WeChat Pay</label>
+    <label><input type="checkbox" data-id="bonus-6"> <span class="attraction-icon">🙏</span>Learn how to say “thank you” in Chinese</label>
   </details>
 
   <div class="social-sharing">

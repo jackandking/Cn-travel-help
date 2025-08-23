@@ -72,6 +72,37 @@
     .social-button.wechat { background: #07c160; color: white; }
     .social-button.copy { background: #6c757d; color: white; }
     .social-button.copy.copied { background: #28a745; }
+    
+    /* Enhanced visual styling */
+    label {
+      display: flex;
+      align-items: center;
+      margin: 0.8em 0;
+      cursor: pointer;
+      padding: 0.5em 0.8em;
+      border-radius: 6px;
+      transition: background-color 0.2s ease;
+      font-size: 0.95em;
+      line-height: 1.4;
+    }
+    label:hover {
+      background-color: rgba(3, 102, 214, 0.05);
+    }
+    label input[type="checkbox"] {
+      margin-right: 0.8em;
+      transform: scale(1.1);
+    }
+    .attraction-icon {
+      margin-right: 0.5em;
+      font-size: 1.1em;
+    }
+    h2 {
+      margin-top: 2em;
+      color: #2c3e50;
+      font-size: 1.4em;
+      border-bottom: 2px solid #0366d6;
+      padding-bottom: 0.3em;
+    }
   </style>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -96,19 +127,19 @@
 <body>
   <h1>🧳 Shanghai Travel Checklist</h1>
   <p>Tick the boxes as you explore Shanghai's top attractions!</p>  <h2>🏙️ Iconic Attractions</h2>
-  <label><input type="checkbox" id="bund">The Bund (Waitan)</label>
-  <label><input type="checkbox" id="shanghaiTower">Shanghai Tower</label>
-  <label><input type="checkbox" id="orientalPearl">Oriental Pearl Tower</label>
-  <label><input type="checkbox" id="nanjingRoad">Nanjing Road Walking Street</label>
-  <label><input type="checkbox" id="yuyuanGarden">Yu Garden (Yuyuan)</label>  <h2>🖼️ Museums & Culture</h2>
-  <label><input type="checkbox" id="shanghaiMuseum">Shanghai Museum</label>
-  <label><input type="checkbox" id="urbanPlanning">Urban Planning Exhibition Hall</label>  <h2>🌆 Neighborhoods</h2>
-  <label><input type="checkbox" id="xintiandi">Xintiandi</label>
-  <label><input type="checkbox" id="tianzifang">Tianzifang Art Street</label>
-  <label><input type="checkbox" id="frenchConcession">Former French Concession</label>  <h2>🍜 Local Experiences</h2>
-  <label><input type="checkbox" id="dumplings">Eat soup dumplings (Xiaolongbao)</label>
-  <label><input type="checkbox" id="huangpuCruise">Huangpu River Cruise</label>
-  <label><input type="checkbox" id="maglev">Take the Maglev train</label>
+  <label><input type="checkbox" id="bund"><span class="attraction-icon">🏙️</span>The Bund (Waitan)</label>
+  <label><input type="checkbox" id="shanghaiTower"><span class="attraction-icon">🏗️</span>Shanghai Tower</label>
+  <label><input type="checkbox" id="orientalPearl"><span class="attraction-icon">📡</span>Oriental Pearl Tower</label>
+  <label><input type="checkbox" id="nanjingRoad"><span class="attraction-icon">🛍️</span>Nanjing Road Walking Street</label>
+  <label><input type="checkbox" id="yuyuanGarden"><span class="attraction-icon">🏮</span>Yu Garden (Yuyuan)</label>  <h2>🖼️ Museums & Culture</h2>
+  <label><input type="checkbox" id="shanghaiMuseum"><span class="attraction-icon">🏛️</span>Shanghai Museum</label>
+  <label><input type="checkbox" id="urbanPlanning"><span class="attraction-icon">🏗️</span>Urban Planning Exhibition Hall</label>  <h2>🌆 Neighborhoods</h2>
+  <label><input type="checkbox" id="xintiandi"><span class="attraction-icon">🏘️</span>Xintiandi</label>
+  <label><input type="checkbox" id="tianzifang"><span class="attraction-icon">🎨</span>Tianzifang Art Street</label>
+  <label><input type="checkbox" id="frenchConcession"><span class="attraction-icon">🇫🇷</span>Former French Concession</label>  <h2>🍜 Local Experiences</h2>
+  <label><input type="checkbox" id="dumplings"><span class="attraction-icon">🥟</span>Eat soup dumplings (Xiaolongbao)</label>
+  <label><input type="checkbox" id="huangpuCruise"><span class="attraction-icon">🚢</span>Huangpu River Cruise</label>
+  <label><input type="checkbox" id="maglev"><span class="attraction-icon">🚄</span>Take the Maglev train</label>
 
   <div class="social-sharing">
     <h3>📱 Share This Shanghai Guide</h3>
