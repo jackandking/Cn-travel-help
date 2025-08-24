@@ -195,6 +195,43 @@
     .social-button.copy.copied {
       background: #28a745;
     }
+    .related-destinations {
+      background: #f8f9fa;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      border: 1px solid #dee2e6;
+    }
+    .related-destinations h3 {
+      color: #0366d6;
+      margin-bottom: 1em;
+      font-size: 1.1em;
+      text-align: center;
+    }
+    .destination-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8em;
+      justify-content: center;
+    }
+    .destination-links a {
+      display: inline-block;
+      padding: 0.7em 1.2em;
+      background: #e3f2fd;
+      color: #0366d6;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      border: 1px solid #bbdefb;
+    }
+    .destination-links a:hover {
+      background: #2196f3;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      text-decoration: none;
+    }
     @media (max-width: 600px) {
       .social-buttons {
         flex-direction: column;
@@ -202,6 +239,13 @@
       }
       .social-button {
         justify-content: center;
+      }
+      .destination-links {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .destination-links a {
+        text-align: center;
       }
     }
   </style>
@@ -220,7 +264,18 @@
     <a href="index.html">🏠 Home</a>
     <a href="Beijing-kids-checklist.html">🧒 Beijing for Kids</a>
     <a href="China-travel-checklist.html">🇨🇳 China Guide</a>
-  </nav>  <details>
+  </nav>
+
+  <div class="related-destinations">
+    <h3>🗺️ Explore More Imperial Cities</h3>
+    <div class="destination-links">
+      <a href="Xi-an-travel-checklist.html">🏺 Xi'an - Terracotta Warriors</a>
+      <a href="Shanghai-travel-checklist.html">🏙️ Shanghai - Modern Metropolis</a>
+      <a href="Nanjing-travel-checklist.html">🏛️ Nanjing - Ancient Capital</a>
+    </div>
+  </div>
+
+  <details>
     <summary>1. The Forbidden City (故宫)</summary>
     <p>Explore the largest ancient imperial palace in the world. Imagine you're an emperor walking through the red walls and golden roofs.</p>
     <label><input type="checkbox" data-id="forbidden-1"> <span class="attraction-icon">🚪</span>Enter through the Meridian Gate (午门)</label>

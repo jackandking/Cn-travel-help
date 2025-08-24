@@ -66,7 +66,56 @@
       display: block;
       margin: 0.5em 0;
       cursor: pointer;
+    }    .related-destinations {
+      background: linear-gradient(135deg, #fff3e0 0%, #ffecb3 100%);
+      padding: 1.5em;
+      border-radius: 12px;
+      margin: 2em 0;
+      border: 2px solid #ffb74d;
     }
+    .related-destinations h3 {
+      color: #ff6b6b;
+      margin-bottom: 1em;
+      font-size: 1.2em;
+      text-align: center;
+      font-weight: bold;
+    }
+    .destination-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8em;
+      justify-content: center;
+    }
+    .destination-links a {
+      display: inline-block;
+      padding: 0.8em 1.3em;
+      background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.9em;
+      transition: all 0.3s ease;
+      border: 2px solid #0288d1;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .destination-links a:hover {
+      background: linear-gradient(135deg, #ff6b6b 0%, #ff5722 100%);
+      border-color: #d32f2f;
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      text-decoration: none;
+    }
+    @media (max-width: 600px) {
+      .destination-links {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .destination-links a {
+        text-align: center;
+      }
+    }
+
   </style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-QEBJRV187V"></script>
@@ -84,8 +133,16 @@
     <a href="Jiaxing-travel-checklist.html">👨 Jiaxing for Adults</a>
     <a href="China-travel-checklist.html">🇨🇳 China Guide</a>
   </nav>
+  <div class="related-destinations">
+    <h3>🗺️ More Water Adventures</h3>
+    <div class="destination-links">
+      <a href="Hangzhou-kids-checklist.html">🌸 Hangzhou Kids - Lake Paradise</a>
+      <a href="Wuzhen-kids-checklist.html">🏮 Wuzhen Kids - Canal Fun</a>
+      <a href="Shanghai-kids-checklist.html">🏙️ Shanghai Kids - Modern Adventures</a>
+    </div>
+  </div>
 
-  <details>
+  <<details>
     <summary>🏞️ Nanhu Lake Adventure</summary>
     <p>Explore the beautiful lake where important Chinese history happened!</p>
     <label><input type="checkbox" data-id="kids-lake-1"> Take a boat ride on the pretty lake</label>
