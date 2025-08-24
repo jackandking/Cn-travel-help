@@ -219,8 +219,267 @@
       }
     }
   </style>
+  <!-- Firebase SDK -->
+  <script type="module">
+    // Import Firebase modules
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
+    import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js';
+    import { getAuth, signInAnonymously, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
+
+    // Firebase configuration (placeholder - replace with your config)
+    const firebaseConfig = {
+      apiKey: "your-api-key",
+      authDomain: "your-project.firebaseapp.com", 
+      projectId: "your-project-id",
+      storageBucket: "your-project.appspot.com",
+      messagingSenderId: "123456789",
+      appId: "your-app-id"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth(app);
+    let currentUser = null;
+
+    // Page Rating System
+    const pageId = 'shanghai-travel-checklist';
+    const stars = document.querySelectorAll('.star');
+    const ratingInfo = document.getElementById('ratingInfo');
+    
+    // Initialize authentication
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        currentUser = user;
+        loadRatingData();
+      } else {
+        signInAnonymously(auth);
+      }
+    });
+
+    // Load rating data from Firebase
+    async function loadRatingData() {
+      try {
+        // Load aggregate rating data
+        const aggregateDoc = await getDoc(doc(db, 'pageRatings', pageId));
+        let aggregateData = { totalVotes: 0, totalScore: 0, averageRating: 0 };
+        
+        if (aggregateDoc.exists()) {
+          aggregateData = aggregateDoc.data();
+        }
+        
+        // Load user's personal rating
+        let userRating = 0;
+        if (currentUser) {
+          const userDoc = await getDoc(doc(db, 'userRatings', `${currentUser.uid}_${pageId}`));
+          if (userDoc.exists()) {
+            userRating = userDoc.data().rating;
+          }
+        }
+        
+        // Update display
+        updateRatingInfo(aggregateData, userRating);
+        if (userRating > 0) {
+          updateStarDisplay(userRating);
+        }
+        
+      } catch (error) {
+        console.error('Error loading rating data:', error);
+        // Fallback to localStorage for offline usage
+        const data = localStorage.getItem(`pageRating_${pageId}`);
+        const fallbackData = data ? JSON.parse(data) : { userRating: 0, totalVotes: 0, totalScore: 0 };
+        updateRatingInfo({ totalVotes: fallbackData.totalVotes, totalScore: fallbackData.totalScore }, fallbackData.userRating);
+      }
+    }
+
+    // Save rating to Firebase
+    async function saveRating(newRating) {
+      if (!currentUser) {
+        console.error('User not authenticated');
+        return false;
+      }
+      
+      try {
+        const userRatingDocRef = doc(db, 'userRatings', `${currentUser.uid}_${pageId}`);
+        const aggregateDocRef = doc(db, 'pageRatings', pageId);
+        
+        // Get current user rating
+        const userDoc = await getDoc(userRatingDocRef);
+        const previousRating = userDoc.exists() ? userDoc.data().rating : 0;
+        
+        // Save/update user rating
+        await setDoc(userRatingDocRef, {
+          userId: currentUser.uid,
+          pageId: pageId,
+          rating: newRating,
+          timestamp: serverTimestamp()
+        });
+        
+        // Update aggregate data
+        const aggregateDoc = await getDoc(aggregateDocRef);
+        
+        if (previousRating === 0) {
+          // New rating
+          if (aggregateDoc.exists()) {
+            await updateDoc(aggregateDocRef, {
+              totalVotes: increment(1),
+              totalScore: increment(newRating),
+              lastUpdated: serverTimestamp()
+            });
+          } else {
+            await setDoc(aggregateDocRef, {
+              totalVotes: 1,
+              totalScore: newRating,
+              averageRating: newRating,
+              lastUpdated: serverTimestamp()
+            });
+          }
+        } else {
+          // Update existing rating
+          const scoreDifference = newRating - previousRating;
+          await updateDoc(aggregateDocRef, {
+            totalScore: increment(scoreDifference),
+            lastUpdated: serverTimestamp()
+          });
+        }
+        
+        // Calculate new average
+        const updatedDoc = await getDoc(aggregateDocRef);
+        if (updatedDoc.exists()) {
+          const data = updatedDoc.data();
+          const newAverage = data.totalScore / data.totalVotes;
+          await updateDoc(aggregateDocRef, {
+            averageRating: newAverage
+          });
+        }
+        
+        // Reload data to update display
+        await loadRatingData();
+        
+        // Show success message
+        const wasUpdate = previousRating > 0;
+        const message = wasUpdate ? 'Rating updated!' : 'Thank you for rating!';
+        showRatingMessage(message);
+        
+        return true;
+        
+      } catch (error) {
+        console.error('Error saving rating:', error);
+        // Fallback to localStorage
+        const data = JSON.parse(localStorage.getItem(`pageRating_${pageId}`) || '{"userRating":0,"totalVotes":0,"totalScore":0}');
+        const wasRated = data.userRating > 0;
+        
+        if (wasRated) {
+          data.totalScore = data.totalScore - data.userRating + newRating;
+          data.userRating = newRating;
+        } else {
+          data.totalVotes += 1;
+          data.totalScore += newRating;
+          data.userRating = newRating;
+        }
+        
+        localStorage.setItem(`pageRating_${pageId}`, JSON.stringify(data));
+        updateStarDisplay(newRating);
+        updateRatingInfo({ totalVotes: data.totalVotes, totalScore: data.totalScore }, data.userRating);
+        
+        const message = wasRated ? 'Rating updated!' : 'Thank you for rating!';
+        showRatingMessage(message);
+        return true;
+      }
+    }
+
+    // Show rating message
+    function showRatingMessage(message) {
+      const originalContent = ratingInfo.innerHTML;
+      ratingInfo.innerHTML = message;
+      setTimeout(() => {
+        loadRatingData(); // Refresh to show current stats
+      }, 2000);
+    }
+
+    // Update star display
+    function updateStarDisplay(rating) {
+      stars.forEach((star, index) => {
+        if (index < rating) {
+          star.classList.add('active');
+        } else {
+          star.classList.remove('active');
+        }
+      });
+    }
+    
+    // Update rating info display
+    function updateRatingInfo(aggregateData, userRating = 0) {
+      if (aggregateData.totalVotes > 0) {
+        const average = aggregateData.averageRating || (aggregateData.totalScore / aggregateData.totalVotes);
+        const voteText = aggregateData.totalVotes === 1 ? 'vote' : 'votes';
+        ratingInfo.innerHTML = `Average: ${average.toFixed(1)}/5 (${aggregateData.totalVotes} ${voteText})`;
+        ratingInfo.classList.add('rated');
+        if (userRating > 0) {
+          updateStarDisplay(userRating);
+        }
+      } else {
+        ratingInfo.innerHTML = 'Click a star to rate this page';
+        ratingInfo.classList.remove('rated');
+      }
+    }
+    
+    // Handle star click
+    async function handleStarClick(rating) {
+      if (!currentUser) {
+        ratingInfo.innerHTML = 'Loading...';
+        return;
+      }
+      
+      ratingInfo.innerHTML = 'Saving your rating...';
+      updateStarDisplay(rating);
+      
+      const success = await saveRating(rating);
+      if (!success) {
+        ratingInfo.innerHTML = 'Error saving rating. Please try again.';
+      }
+    }
+
+    // Initialize rating system
+    stars.forEach((star, index) => {
+      const rating = index + 1;
+      
+      // Click handler
+      star.addEventListener('click', () => handleStarClick(rating));
+      
+      // Keyboard handler
+      star.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleStarClick(rating);
+        }
+      });
+      
+      // Hover effects
+      star.addEventListener('mouseenter', () => {
+        stars.forEach((s, i) => {
+          if (i < rating) {
+            s.classList.add('hover-active');
+          } else {
+            s.classList.remove('hover-active');
+          }
+        });
+      });
+      
+      star.addEventListener('mouseleave', () => {
+        stars.forEach(s => s.classList.remove('hover-active'));
+      });
+    });
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      ratingInfo.innerHTML = 'Loading ratings...';
+    });
+  </script>
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // Checkbox persistence (keep using localStorage for now)
       document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
         const id = checkbox.id;
         checkbox.checked = localStorage.getItem(id) === 'true';
@@ -228,109 +487,6 @@
           localStorage.setItem(id, checkbox.checked);
         });
       });
-
-      // Page Rating System
-      const pageId = 'shanghai-travel-checklist';
-      const stars = document.querySelectorAll('.star');
-      const ratingInfo = document.getElementById('ratingInfo');
-      
-      // Load existing rating data
-      function loadRatingData() {
-        const data = localStorage.getItem(`pageRating_${pageId}`);
-        return data ? JSON.parse(data) : { userRating: 0, totalVotes: 0, totalScore: 0 };
-      }
-      
-      // Save rating data
-      function saveRatingData(data) {
-        localStorage.setItem(`pageRating_${pageId}`, JSON.stringify(data));
-      }
-      
-      // Update star display
-      function updateStarDisplay(rating) {
-        stars.forEach((star, index) => {
-          if (index < rating) {
-            star.classList.add('active');
-          } else {
-            star.classList.remove('active');
-          }
-        });
-      }
-      
-      // Update rating info display
-      function updateRatingInfo() {
-        const data = loadRatingData();
-        if (data.totalVotes > 0) {
-          const average = (data.totalScore / data.totalVotes).toFixed(1);
-          const voteText = data.totalVotes === 1 ? 'vote' : 'votes';
-          ratingInfo.innerHTML = `Average: ${average}/5 (${data.totalVotes} ${voteText})`;
-          ratingInfo.classList.add('rated');
-          if (data.userRating > 0) {
-            updateStarDisplay(data.userRating);
-          }
-        } else {
-          ratingInfo.innerHTML = 'Click a star to rate this page';
-          ratingInfo.classList.remove('rated');
-        }
-      }
-      
-      // Handle star click
-      function handleStarClick(rating) {
-        const data = loadRatingData();
-        const wasRated = data.userRating > 0;
-        
-        if (wasRated) {
-          // Update existing rating
-          data.totalScore = data.totalScore - data.userRating + rating;
-          data.userRating = rating;
-        } else {
-          // New rating
-          data.totalVotes += 1;
-          data.totalScore += rating;
-          data.userRating = rating;
-        }
-        
-        saveRatingData(data);
-        updateStarDisplay(rating);
-        updateRatingInfo();
-        
-        // Show feedback
-        const message = wasRated ? 'Rating updated!' : 'Thank you for rating!';
-        ratingInfo.innerHTML = `${message} Average: ${(data.totalScore / data.totalVotes).toFixed(1)}/5 (${data.totalVotes} ${data.totalVotes === 1 ? 'vote' : 'votes'})`;
-      }
-      
-      // Initialize rating system
-      stars.forEach((star, index) => {
-        const rating = index + 1;
-        
-        // Click handler
-        star.addEventListener('click', () => handleStarClick(rating));
-        
-        // Keyboard handler
-        star.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            handleStarClick(rating);
-          }
-        });
-        
-        // Hover effects
-        star.addEventListener('mouseenter', () => {
-          stars.forEach((s, i) => {
-            if (i < rating) {
-              s.classList.add('hover-active');
-            } else {
-              s.classList.remove('hover-active');
-            }
-          });
-        });
-        
-        star.addEventListener('mouseleave', () => {
-          stars.forEach(s => s.classList.remove('hover-active'));
-        });
-      });
-      
-      // Initialize rating display
-      updateRatingInfo();
     });
   </script>
   <!-- Google tag (gtag.js) -->
