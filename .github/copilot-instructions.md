@@ -31,6 +31,8 @@ tidy -quiet -errors Beijing-travel-checklist.html
 for file in *.html; do tidy -quiet -errors "$file" >/dev/null 2>&1 && echo "$file: OK" || echo "$file: ERRORS"; done
 ```
 
+**Note**: Some HTML files have minor validation warnings due to structural inconsistencies (e.g., content outside proper head/body tags). These do not affect functionality but should be noted when making changes.
+
 ### Local Testing
 Always test functionality with local server:
 ```bash
@@ -75,7 +77,27 @@ cd /home/runner/work/Cn-travel-help/Cn-travel-help && python3 -m http.server 808
 ├── Xi-an-kids-checklist.html           # Xi'an kids checklist
 ├── Guangzhou-travel-checklist.html     # Guangzhou adult checklist
 ├── Guangzhou-kids-checklist.html       # Guangzhou kids checklist
+├── Zhangjiajie-travel-checklist.html   # Zhangjiajie adult checklist
+├── Zhangjiajie-kids-checklist.html     # Zhangjiajie kids checklist
+├── Hangzhou-travel-checklist.html      # Hangzhou adult checklist
+├── Hangzhou-kids-checklist.html        # Hangzhou kids checklist
+├── Nanjing-travel-checklist.html       # Nanjing adult checklist
+├── Nanjing-kids-checklist.html         # Nanjing kids checklist
+├── Chengdu-travel-checklist.html       # Chengdu adult checklist
+├── Chengdu-kids-checklist.html         # Chengdu kids checklist
+├── Chongqing-travel-checklist.html     # Chongqing adult checklist
+├── Chongqing-kids-checklist.html       # Chongqing kids checklist
+├── Jiaxing-travel-checklist.html       # Jiaxing adult checklist
+├── Jiaxing-kids-checklist.html         # Jiaxing kids checklist
+├── Wuzhen-travel-checklist.html        # Wuzhen adult checklist
+├── Wuzhen-kids-checklist.html          # Wuzhen kids checklist
 ├── Cambridge-kid-checklist.html        # Cambridge kids checklist
+├── forbidden-city.html                 # Special Forbidden City guide
+├── about.html                          # About page
+├── contact.html                        # Contact page
+├── faq.html                            # Frequently asked questions
+├── privacy-policy.html                 # Privacy policy
+├── terms-of-service.html               # Terms of service
 ├── feedback.html                       # User feedback form
 ├── CNAME                               # Custom domain: cn-travel-help.cn
 ├── README.md                           # Project documentation
@@ -171,6 +193,13 @@ document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
 - **Consistent styling** across all pages
 - **No external CSS dependencies**
 
+### Firebase Integration (Optional)
+Some checklist pages (Beijing, Shanghai) include Firebase-based star rating systems:
+- **Firebase configuration**: Stored in individual HTML files
+- **Anonymous authentication**: Users can rate pages without accounts
+- **Fallback**: Works offline with localStorage if Firebase unavailable
+- **Setup guide**: See `FIREBASE_SETUP.md` for configuration details
+
 ## Common Tasks Reference
 
 ### Quick Commands
@@ -214,8 +243,8 @@ Before committing any changes, ensure:
 - [ ] All new files added to navigation in `index.html`
 
 ## Performance Notes
-- **HTML validation**: <1 second for all 12 files
-- **Local server startup**: Immediate (<1 second)
+- **HTML validation**: <1 second (for all files)
+- **Local server startup**: Immediate (starts immediately)
 - **Page load time**: Nearly instant (static files)
 - **GitHub Pages deployment**: 2-5 minutes (NEVER CANCEL)
 - **Full manual testing**: 5-10 minutes for complete validation
