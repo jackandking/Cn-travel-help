@@ -219,155 +219,199 @@
       }
     }
   </style>
-  <!-- Firebase SDK -->
-  <script type="module">
-    // Import Firebase modules
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
-    import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js';
-    import { getAuth, signInAnonymously, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
-
-    // Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyBwmE3Bkgef0fLjXdbaiCKAi2jsSJ5LTRw",
-      authDomain: "china-travel-help.firebaseapp.com",
-      databaseURL: "https://china-travel-help-default-rtdb.firebaseio.com",
-      projectId: "china-travel-help",
-      storageBucket: "china-travel-help.firebasestorage.app",
-      messagingSenderId: "82036149118",
-      appId: "1:82036149118:web:f896a7fd914dad1786812f",
-      measurementId: "G-LWY4T61FST"
-    };
-
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const auth = getAuth(app);
-    let currentUser = null;
-
-    // Page Rating System
-    const pageId = 'shanghai-travel-checklist';
-    const stars = document.querySelectorAll('.star');
-    const ratingInfo = document.getElementById('ratingInfo');
-    
-    // Initialize authentication
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        currentUser = user;
-        loadRatingData();
-      } else {
-        signInAnonymously(auth);
+  <!-- Rating System Script -->
+  <script>
+    // Page Rating System - Works with or without Firebase
+    (function() {
+      'use strict';
+      
+      const pageId = 'shanghai-travel-checklist';
+      let stars, ratingInfo;
+      let firebaseApp, db, auth, currentUser = null;
+      let isFirebaseAvailable = false;
+      
+      // Initialize DOM elements
+      function initializeDOM() {
+        stars = document.querySelectorAll('.star');
+        ratingInfo = document.getElementById('ratingInfo');
+        
+        if (!stars.length || !ratingInfo) {
+          console.error('Rating elements not found');
+          return false;
+        }
+        return true;
       }
-    });
+      
+      // Initialize Firebase (if available)
+      async function initializeFirebase() {
+        try {
+          // Dynamic import to handle blocked resources gracefully
+          const { initializeApp } = await import('https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js');
+          const { getFirestore, doc, getDoc, setDoc, updateDoc, increment, serverTimestamp } = await import('https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js');
+          const { getAuth, signInAnonymously, onAuthStateChanged } = await import('https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js');
+          
+          // Firebase configuration
+          const firebaseConfig = {
+            apiKey: "AIzaSyBwmE3Bkgef0fLjXdbaiCKAi2jsSJ5LTRw",
+            authDomain: "china-travel-help.firebaseapp.com",
+            databaseURL: "https://china-travel-help-default-rtdb.firebaseio.com",
+            projectId: "china-travel-help",
+            storageBucket: "china-travel-help.firebasestorage.app",
+            messagingSenderId: "82036149118",
+            appId: "1:82036149118:web:f896a7fd914dad1786812f",
+            measurementId: "G-LWY4T61FST"
+          };
 
-    // Load rating data from Firebase
-    async function loadRatingData() {
-      try {
-        // Load aggregate rating data
-        const aggregateDoc = await getDoc(doc(db, 'pageRatings', pageId));
-        let aggregateData = { totalVotes: 0, totalScore: 0, averageRating: 0 };
-        
-        if (aggregateDoc.exists()) {
-          aggregateData = aggregateDoc.data();
+          // Initialize Firebase
+          firebaseApp = initializeApp(firebaseConfig);
+          db = getFirestore(firebaseApp);
+          auth = getAuth(firebaseApp);
+          
+          // Store Firebase functions for later use
+          window.firebaseFunctions = { doc, getDoc, setDoc, updateDoc, increment, serverTimestamp };
+          
+          isFirebaseAvailable = true;
+          console.log('Firebase initialized successfully');
+          
+          // Initialize authentication
+          onAuthStateChanged(auth, (user) => {
+            if (user) {
+              currentUser = user;
+              loadRatingData();
+            } else {
+              signInAnonymously(auth);
+            }
+          });
+          
+        } catch (error) {
+          console.log('Firebase not available, using localStorage fallback:', error.message);
+          isFirebaseAvailable = false;
+          loadLocalRatingData();
+        }
+      }
+      
+      // Load rating data from Firebase
+      async function loadRatingData() {
+        if (!isFirebaseAvailable) {
+          loadLocalRatingData();
+          return;
         }
         
-        // Load user's personal rating
-        let userRating = 0;
-        if (currentUser) {
-          const userDoc = await getDoc(doc(db, 'userRatings', `${currentUser.uid}_${pageId}`));
-          if (userDoc.exists()) {
-            userRating = userDoc.data().rating;
+        try {
+          const { doc, getDoc } = window.firebaseFunctions;
+          
+          // Load aggregate rating data
+          const aggregateDoc = await getDoc(doc(db, 'pageRatings', pageId));
+          let aggregateData = { totalVotes: 0, totalScore: 0, averageRating: 0 };
+          
+          if (aggregateDoc.exists()) {
+            aggregateData = aggregateDoc.data();
           }
+          
+          // Load user's personal rating
+          let userRating = 0;
+          if (currentUser) {
+            const userDoc = await getDoc(doc(db, 'userRatings', `${currentUser.uid}_${pageId}`));
+            if (userDoc.exists()) {
+              userRating = userDoc.data().rating;
+            }
+          }
+          
+          // Update display
+          updateRatingInfo(aggregateData, userRating);
+          if (userRating > 0) {
+            updateStarDisplay(userRating);
+          }
+          
+        } catch (error) {
+          console.error('Error loading Firebase rating data:', error);
+          loadLocalRatingData();
         }
-        
-        // Update display
-        updateRatingInfo(aggregateData, userRating);
-        if (userRating > 0) {
-          updateStarDisplay(userRating);
-        }
-        
-      } catch (error) {
-        console.error('Error loading rating data:', error);
-        // Fallback to localStorage for offline usage
+      }
+      
+      // Load rating data from localStorage (fallback)
+      function loadLocalRatingData() {
         const data = localStorage.getItem(`pageRating_${pageId}`);
         const fallbackData = data ? JSON.parse(data) : { userRating: 0, totalVotes: 0, totalScore: 0 };
         updateRatingInfo({ totalVotes: fallbackData.totalVotes, totalScore: fallbackData.totalScore }, fallbackData.userRating);
+        
+        if (fallbackData.userRating > 0) {
+          updateStarDisplay(fallbackData.userRating);
+        }
       }
-    }
 
-    // Save rating to Firebase
-    async function saveRating(newRating) {
-      if (!currentUser) {
-        console.error('User not authenticated');
-        return false;
-      }
-      
-      try {
-        const userRatingDocRef = doc(db, 'userRatings', `${currentUser.uid}_${pageId}`);
-        const aggregateDocRef = doc(db, 'pageRatings', pageId);
+      // Save rating to Firebase
+      async function saveRatingFirebase(newRating) {
+        if (!isFirebaseAvailable || !currentUser) {
+          return false;
+        }
         
-        // Get current user rating
-        const userDoc = await getDoc(userRatingDocRef);
-        const previousRating = userDoc.exists() ? userDoc.data().rating : 0;
-        
-        // Save/update user rating
-        await setDoc(userRatingDocRef, {
-          userId: currentUser.uid,
-          pageId: pageId,
-          rating: newRating,
-          timestamp: serverTimestamp()
-        });
-        
-        // Update aggregate data
-        const aggregateDoc = await getDoc(aggregateDocRef);
-        
-        if (previousRating === 0) {
-          // New rating
-          if (aggregateDoc.exists()) {
-            await updateDoc(aggregateDocRef, {
-              totalVotes: increment(1),
-              totalScore: increment(newRating),
-              lastUpdated: serverTimestamp()
-            });
+        try {
+          const { doc, getDoc, setDoc, updateDoc, increment, serverTimestamp } = window.firebaseFunctions;
+          
+          const userRatingDocRef = doc(db, 'userRatings', `${currentUser.uid}_${pageId}`);
+          const aggregateDocRef = doc(db, 'pageRatings', pageId);
+          
+          // Get current user rating
+          const userDoc = await getDoc(userRatingDocRef);
+          const previousRating = userDoc.exists() ? userDoc.data().rating : 0;
+          
+          // Save/update user rating
+          await setDoc(userRatingDocRef, {
+            userId: currentUser.uid,
+            pageId: pageId,
+            rating: newRating,
+            timestamp: serverTimestamp()
+          });
+          
+          // Update aggregate data
+          const aggregateDoc = await getDoc(aggregateDocRef);
+          
+          if (previousRating === 0) {
+            // New rating
+            if (aggregateDoc.exists()) {
+              await updateDoc(aggregateDocRef, {
+                totalVotes: increment(1),
+                totalScore: increment(newRating),
+                lastUpdated: serverTimestamp()
+              });
+            } else {
+              await setDoc(aggregateDocRef, {
+                totalVotes: 1,
+                totalScore: newRating,
+                averageRating: newRating,
+                lastUpdated: serverTimestamp()
+              });
+            }
           } else {
-            await setDoc(aggregateDocRef, {
-              totalVotes: 1,
-              totalScore: newRating,
-              averageRating: newRating,
+            // Update existing rating
+            const scoreDifference = newRating - previousRating;
+            await updateDoc(aggregateDocRef, {
+              totalScore: increment(scoreDifference),
               lastUpdated: serverTimestamp()
             });
           }
-        } else {
-          // Update existing rating
-          const scoreDifference = newRating - previousRating;
-          await updateDoc(aggregateDocRef, {
-            totalScore: increment(scoreDifference),
-            lastUpdated: serverTimestamp()
-          });
+          
+          // Calculate new average
+          const updatedDoc = await getDoc(aggregateDocRef);
+          if (updatedDoc.exists()) {
+            const data = updatedDoc.data();
+            const newAverage = data.totalScore / data.totalVotes;
+            await updateDoc(aggregateDocRef, {
+              averageRating: newAverage
+            });
+          }
+          
+          return true;
+          
+        } catch (error) {
+          console.error('Error saving to Firebase:', error);
+          return false;
         }
-        
-        // Calculate new average
-        const updatedDoc = await getDoc(aggregateDocRef);
-        if (updatedDoc.exists()) {
-          const data = updatedDoc.data();
-          const newAverage = data.totalScore / data.totalVotes;
-          await updateDoc(aggregateDocRef, {
-            averageRating: newAverage
-          });
-        }
-        
-        // Reload data to update display
-        await loadRatingData();
-        
-        // Show success message
-        const wasUpdate = previousRating > 0;
-        const message = wasUpdate ? 'Rating updated!' : 'Thank you for rating!';
-        showRatingMessage(message);
-        
-        return true;
-        
-      } catch (error) {
-        console.error('Error saving rating:', error);
-        // Fallback to localStorage
+      }
+      
+      // Save rating to localStorage (fallback)
+      function saveRatingLocal(newRating) {
         const data = JSON.parse(localStorage.getItem(`pageRating_${pageId}`) || '{"userRating":0,"totalVotes":0,"totalScore":0}');
         const wasRated = data.userRating > 0;
         
@@ -384,99 +428,148 @@
         updateStarDisplay(newRating);
         updateRatingInfo({ totalVotes: data.totalVotes, totalScore: data.totalScore }, data.userRating);
         
-        const message = wasRated ? 'Rating updated!' : 'Thank you for rating!';
-        showRatingMessage(message);
         return true;
       }
-    }
-
-    // Show rating message
-    function showRatingMessage(message) {
-      const originalContent = ratingInfo.innerHTML;
-      ratingInfo.innerHTML = message;
-      setTimeout(() => {
-        loadRatingData(); // Refresh to show current stats
-      }, 2000);
-    }
-
-    // Update star display
-    function updateStarDisplay(rating) {
-      stars.forEach((star, index) => {
-        if (index < rating) {
-          star.classList.add('active');
+      
+      // Save rating (tries Firebase first, falls back to localStorage)
+      async function saveRating(newRating) {
+        const firebaseSuccess = await saveRatingFirebase(newRating);
+        
+        if (firebaseSuccess) {
+          await loadRatingData(); // Reload to get updated aggregate data
+          const wasUpdate = await checkIfUpdate(newRating);
+          const message = wasUpdate ? 'Rating updated!' : 'Thank you for rating!';
+          showRatingMessage(message);
+          return true;
         } else {
-          star.classList.remove('active');
+          const localSuccess = saveRatingLocal(newRating);
+          if (localSuccess) {
+            const data = JSON.parse(localStorage.getItem(`pageRating_${pageId}`));
+            const wasUpdate = data.totalVotes > 1; // Rough approximation
+            const message = wasUpdate ? 'Rating saved locally!' : 'Rating saved locally!';
+            showRatingMessage(message);
+            return true;
+          }
         }
-      });
-    }
-    
-    // Update rating info display
-    function updateRatingInfo(aggregateData, userRating = 0) {
-      if (aggregateData.totalVotes > 0) {
-        const average = aggregateData.averageRating || (aggregateData.totalScore / aggregateData.totalVotes);
-        const voteText = aggregateData.totalVotes === 1 ? 'vote' : 'votes';
-        ratingInfo.innerHTML = `Average: ${average.toFixed(1)}/5 (${aggregateData.totalVotes} ${voteText})`;
-        ratingInfo.classList.add('rated');
-        if (userRating > 0) {
-          updateStarDisplay(userRating);
-        }
-      } else {
-        ratingInfo.innerHTML = 'Click a star to rate this page';
-        ratingInfo.classList.remove('rated');
-      }
-    }
-    
-    // Handle star click
-    async function handleStarClick(rating) {
-      if (!currentUser) {
-        ratingInfo.innerHTML = 'Loading...';
-        return;
+        
+        return false;
       }
       
-      ratingInfo.innerHTML = 'Saving your rating...';
-      updateStarDisplay(rating);
-      
-      const success = await saveRating(rating);
-      if (!success) {
-        ratingInfo.innerHTML = 'Error saving rating. Please try again.';
+      // Check if this is an update to existing rating
+      async function checkIfUpdate(newRating) {
+        if (isFirebaseAvailable && currentUser) {
+          try {
+            const { doc, getDoc } = window.firebaseFunctions;
+            const userDoc = await getDoc(doc(db, 'userRatings', `${currentUser.uid}_${pageId}`));
+            return userDoc.exists();
+          } catch (error) {
+            return false;
+          }
+        } else {
+          const data = JSON.parse(localStorage.getItem(`pageRating_${pageId}`) || '{"userRating":0}');
+          return data.userRating > 0;
+        }
       }
-    }
 
-    // Initialize rating system
-    stars.forEach((star, index) => {
-      const rating = index + 1;
-      
-      // Click handler
-      star.addEventListener('click', () => handleStarClick(rating));
-      
-      // Keyboard handler
-      star.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          handleStarClick(rating);
-        }
-      });
-      
-      // Hover effects
-      star.addEventListener('mouseenter', () => {
-        stars.forEach((s, i) => {
-          if (i < rating) {
-            s.classList.add('hover-active');
+      // Show rating message
+      function showRatingMessage(message) {
+        ratingInfo.innerHTML = message;
+        setTimeout(() => {
+          if (isFirebaseAvailable) {
+            loadRatingData();
           } else {
-            s.classList.remove('hover-active');
+            loadLocalRatingData();
+          }
+        }, 2000);
+      }
+      
+      // Update star display
+      function updateStarDisplay(rating) {
+        stars.forEach((star, index) => {
+          if (index < rating) {
+            star.classList.add('active');
+          } else {
+            star.classList.remove('active');
           }
         });
-      });
+      }
       
-      star.addEventListener('mouseleave', () => {
-        stars.forEach(s => s.classList.remove('hover-active'));
-      });
-    });
-
-    // Initialize on page load
-    document.addEventListener('DOMContentLoaded', () => {
-      ratingInfo.innerHTML = 'Loading ratings...';
-    });
+      // Update rating info display
+      function updateRatingInfo(aggregateData, userRating = 0) {
+        if (aggregateData.totalVotes > 0) {
+          const average = aggregateData.averageRating || (aggregateData.totalScore / aggregateData.totalVotes);
+          const voteText = aggregateData.totalVotes === 1 ? 'vote' : 'votes';
+          ratingInfo.innerHTML = `Average: ${average.toFixed(1)}/5 (${aggregateData.totalVotes} ${voteText})`;
+          ratingInfo.classList.add('rated');
+          if (userRating > 0) {
+            updateStarDisplay(userRating);
+          }
+        } else {
+          ratingInfo.innerHTML = 'Click a star to rate this page';
+          ratingInfo.classList.remove('rated');
+        }
+      }
+      
+      // Handle star click
+      async function handleStarClick(rating) {
+        ratingInfo.innerHTML = 'Saving your rating...';
+        updateStarDisplay(rating);
+        
+        const success = await saveRating(rating);
+        if (!success) {
+          ratingInfo.innerHTML = 'Error saving rating. Please try again.';
+        }
+      }
+      
+      // Initialize rating system
+      function initializeRatingSystem() {
+        if (!initializeDOM()) return;
+        
+        stars.forEach((star, index) => {
+          const rating = index + 1;
+          
+          // Click handler
+          star.addEventListener('click', () => handleStarClick(rating));
+          
+          // Keyboard handler
+          star.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              handleStarClick(rating);
+            }
+          });
+          
+          // Hover effects
+          star.addEventListener('mouseenter', () => {
+            stars.forEach((s, i) => {
+              if (i < rating) {
+                s.classList.add('hover-active');
+              } else {
+                s.classList.remove('hover-active');
+              }
+            });
+          });
+          
+          star.addEventListener('mouseleave', () => {
+            stars.forEach(s => s.classList.remove('hover-active'));
+          });
+        });
+        
+        // Initialize Firebase (async)
+        initializeFirebase();
+        
+        // Show initial loading state
+        ratingInfo.innerHTML = 'Loading ratings...';
+      }
+      
+      // Initialize when DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeRatingSystem);
+      } else {
+        initializeRatingSystem();
+      }
+      
+    })();
   </script>
 
   <script>
