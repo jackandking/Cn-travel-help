@@ -149,6 +149,75 @@
         text-align: center;
       }
     }
+    
+    /* Page Rating Styles */
+    .page-rating {
+      background: white;
+      padding: 1.5em;
+      border-radius: 8px;
+      text-align: center;
+      margin: 2em 0;
+      border: 1px solid #ddd;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .page-rating h3 {
+      color: #0366d6;
+      margin-bottom: 0.5em;
+      font-size: 1.2em;
+    }
+    .page-rating p {
+      margin-bottom: 1em;
+      color: #666;
+      font-size: 0.9em;
+    }
+    .rating-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8em;
+    }
+    .stars {
+      display: flex;
+      gap: 0.3em;
+      justify-content: center;
+    }
+    .star {
+      font-size: 1.8em;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      padding: 0.2em;
+      border-radius: 50%;
+      filter: grayscale(100%) opacity(0.3);
+    }
+    .star:hover, .star:focus {
+      transform: scale(1.1);
+      outline: none;
+      filter: grayscale(0%) opacity(1);
+    }
+    .star.active {
+      filter: grayscale(0%) opacity(1);
+    }
+    .star.hover-active {
+      filter: grayscale(0%) opacity(0.8);
+    }
+    .rating-info {
+      font-size: 0.9em;
+      color: #666;
+      min-height: 1.2em;
+    }
+    .rating-info.rated {
+      color: #0366d6;
+      font-weight: 500;
+    }
+    @media (max-width: 600px) {
+      .page-rating {
+        margin: 1em 0;
+        padding: 1em;
+      }
+      .star {
+        font-size: 1.5em;
+      }
+    }
   </style>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -159,6 +228,109 @@
           localStorage.setItem(id, checkbox.checked);
         });
       });
+
+      // Page Rating System
+      const pageId = 'shanghai-travel-checklist';
+      const stars = document.querySelectorAll('.star');
+      const ratingInfo = document.getElementById('ratingInfo');
+      
+      // Load existing rating data
+      function loadRatingData() {
+        const data = localStorage.getItem(`pageRating_${pageId}`);
+        return data ? JSON.parse(data) : { userRating: 0, totalVotes: 0, totalScore: 0 };
+      }
+      
+      // Save rating data
+      function saveRatingData(data) {
+        localStorage.setItem(`pageRating_${pageId}`, JSON.stringify(data));
+      }
+      
+      // Update star display
+      function updateStarDisplay(rating) {
+        stars.forEach((star, index) => {
+          if (index < rating) {
+            star.classList.add('active');
+          } else {
+            star.classList.remove('active');
+          }
+        });
+      }
+      
+      // Update rating info display
+      function updateRatingInfo() {
+        const data = loadRatingData();
+        if (data.totalVotes > 0) {
+          const average = (data.totalScore / data.totalVotes).toFixed(1);
+          const voteText = data.totalVotes === 1 ? 'vote' : 'votes';
+          ratingInfo.innerHTML = `Average: ${average}/5 (${data.totalVotes} ${voteText})`;
+          ratingInfo.classList.add('rated');
+          if (data.userRating > 0) {
+            updateStarDisplay(data.userRating);
+          }
+        } else {
+          ratingInfo.innerHTML = 'Click a star to rate this page';
+          ratingInfo.classList.remove('rated');
+        }
+      }
+      
+      // Handle star click
+      function handleStarClick(rating) {
+        const data = loadRatingData();
+        const wasRated = data.userRating > 0;
+        
+        if (wasRated) {
+          // Update existing rating
+          data.totalScore = data.totalScore - data.userRating + rating;
+          data.userRating = rating;
+        } else {
+          // New rating
+          data.totalVotes += 1;
+          data.totalScore += rating;
+          data.userRating = rating;
+        }
+        
+        saveRatingData(data);
+        updateStarDisplay(rating);
+        updateRatingInfo();
+        
+        // Show feedback
+        const message = wasRated ? 'Rating updated!' : 'Thank you for rating!';
+        ratingInfo.innerHTML = `${message} Average: ${(data.totalScore / data.totalVotes).toFixed(1)}/5 (${data.totalVotes} ${data.totalVotes === 1 ? 'vote' : 'votes'})`;
+      }
+      
+      // Initialize rating system
+      stars.forEach((star, index) => {
+        const rating = index + 1;
+        
+        // Click handler
+        star.addEventListener('click', () => handleStarClick(rating));
+        
+        // Keyboard handler
+        star.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handleStarClick(rating);
+          }
+        });
+        
+        // Hover effects
+        star.addEventListener('mouseenter', () => {
+          stars.forEach((s, i) => {
+            if (i < rating) {
+              s.classList.add('hover-active');
+            } else {
+              s.classList.remove('hover-active');
+            }
+          });
+        });
+        
+        star.addEventListener('mouseleave', () => {
+          stars.forEach(s => s.classList.remove('hover-active'));
+        });
+      });
+      
+      // Initialize rating display
+      updateRatingInfo();
     });
   </script>
   <!-- Google tag (gtag.js) -->
@@ -205,6 +377,23 @@
       <a href="Beijing-travel-checklist.html">🏛️ Beijing - Imperial Capital</a>
       <a href="Hangzhou-travel-checklist.html">🌸 Hangzhou - West Lake Paradise</a>
       <a href="Nanjing-travel-checklist.html">🏛️ Nanjing - Historic Capital</a>
+    </div>
+  </div>
+
+  <div class="page-rating">
+    <h3>⭐ Rate This Page</h3>
+    <p>Help other travelers by rating this Shanghai travel guide!</p>
+    <div class="rating-container">
+      <div class="stars" id="starRating">
+        <span class="star" data-rating="1" tabindex="0" role="button" aria-label="Rate 1 star">⭐</span>
+        <span class="star" data-rating="2" tabindex="0" role="button" aria-label="Rate 2 stars">⭐</span>
+        <span class="star" data-rating="3" tabindex="0" role="button" aria-label="Rate 3 stars">⭐</span>
+        <span class="star" data-rating="4" tabindex="0" role="button" aria-label="Rate 4 stars">⭐</span>
+        <span class="star" data-rating="5" tabindex="0" role="button" aria-label="Rate 5 stars">⭐</span>
+      </div>
+      <div class="rating-info" id="ratingInfo">
+        <span>Click a star to rate this page</span>
+      </div>
     </div>
   </div>
 
