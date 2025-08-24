@@ -93,10 +93,66 @@
       display: block;
       margin: 0.5em 0;
       cursor: pointer;
+    }    .related-destinations {
+      background: #f8f9fa;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+      border: 1px solid #dee2e6;
     }
+    .related-destinations h3 {
+      color: #0366d6;
+      margin-bottom: 1em;
+      font-size: 1.1em;
+      text-align: center;
+    }
+    .destination-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8em;
+      justify-content: center;
+    }
+    .destination-links a {
+      display: inline-block;
+      padding: 0.7em 1.2em;
+      background: #e3f2fd;
+      color: #0366d6;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      border: 1px solid #bbdefb;
+    }
+    .destination-links a:hover {
+      background: #2196f3;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      text-decoration: none;
+    }
+    @media (max-width: 600px) {
+      .destination-links {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .destination-links a {
+        text-align: center;
+      }
+    }
+
   </style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-QEBJRV187V"></script>
+
+  <div class="related-destinations">
+    <h3>🗺️ Explore Cultural China</h3>
+    <div class="destination-links">
+      <a href="Shanghai-travel-checklist.html">🏙️ Shanghai - Modern Neighbor</a>
+      <a href="Nanjing-travel-checklist.html">🏛️ Nanjing - Historic Capital</a>
+      <a href="Wuzhen-travel-checklist.html">🏮 Wuzhen - Ancient Water Town</a>
+    </div>
+  </div>
+
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -111,8 +167,7 @@
     <a href="Hangzhou-kids-checklist.html">🧒 Hangzhou for Kids</a>
     <a href="China-travel-checklist.html">🇨🇳 China Guide</a>
   </nav>
-
-  <details>
+  <<details>
     <summary>1. West Lake (西湖) - UNESCO World Heritage Site</summary>
     <p>One of China's most celebrated natural beauty spots, inspiring poets and artists for centuries.</p>
     <label><input type="checkbox" data-id="westlake-1"> Take a boat cruise on the lake</label>
