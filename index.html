@@ -256,6 +256,118 @@
     .social-button.copy.copied {
       background: #28a745;
     }
+    .achievements-section {
+      background: white;
+      padding: 2em;
+      border-radius: 12px;
+      text-align: center;
+      margin: 3em 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .achievements-section h3 {
+      color: #2c5aa0;
+      margin-bottom: 1em;
+      font-size: 1.5em;
+    }
+    .achievements-content {
+      margin-top: 1.5em;
+    }
+    .no-progress {
+      padding: 2em;
+      color: #666;
+    }
+    .achievement-icon {
+      font-size: 3em;
+      margin-bottom: 1em;
+      opacity: 0.7;
+    }
+    .start-journey-btn {
+      display: inline-block;
+      background: #2c5aa0;
+      color: white;
+      padding: 0.8em 1.5em;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 1em;
+      transition: background-color 0.3s ease;
+    }
+    .start-journey-btn:hover {
+      background: #1e3f73;
+      text-decoration: none;
+    }
+    .progress-overview {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5em;
+      margin: 2em 0;
+    }
+    .progress-card {
+      background: #f8f9fa;
+      border: 2px solid #e9ecef;
+      border-radius: 8px;
+      padding: 1.5em;
+      text-align: center;
+    }
+    .progress-card.active {
+      border-color: #28a745;
+      background: #d4edda;
+    }
+    .progress-card h4 {
+      color: #2c5aa0;
+      margin-bottom: 0.5em;
+      font-size: 1.1em;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #e9ecef;
+      border-radius: 4px;
+      margin: 1em 0;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #28a745, #20c997);
+      border-radius: 4px;
+      transition: width 0.5s ease;
+    }
+    .progress-stats {
+      font-size: 0.9em;
+      color: #666;
+      margin-top: 0.5em;
+    }
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1em;
+      margin: 2em 0;
+    }
+    .achievement-badge {
+      background: linear-gradient(135deg, #ffd700, #ffed4e);
+      border: 2px solid #f39c12;
+      border-radius: 8px;
+      padding: 1em;
+      text-align: center;
+      color: #333;
+      font-weight: bold;
+    }
+    .achievement-badge.locked {
+      background: #f8f9fa;
+      border-color: #dee2e6;
+      color: #adb5bd;
+    }
+    .achievement-emoji {
+      font-size: 2em;
+      margin-bottom: 0.5em;
+      display: block;
+    }
+      });
+    }
+
+    // Load achievements when page loads
+    document.addEventListener('DOMContentLoaded', loadAchievements);
+
     @media (max-width: 768px) {
       .container {
         padding: 1em;
@@ -268,6 +380,12 @@
       }
       .features {
         grid-template-columns: 1fr;
+      }
+      .progress-overview {
+        grid-template-columns: 1fr;
+      }
+      .achievements-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       }
       .social-buttons {
         flex-direction: column;
@@ -385,6 +503,18 @@
       </div>
     </div>
 
+    <div class="achievements-section" id="achievementsSection">
+      <h3>🏆 Your Travel Achievements</h3>
+      <p>Track your progress across all China destinations and see how far you've come on your journey!</p>
+      <div class="achievements-content" id="achievementsContent">
+        <div class="no-progress">
+          <div class="achievement-icon">🗺️</div>
+          <p>Start exploring our checklists to see your achievements here!</p>
+          <a href="China-travel-checklist.html" class="start-journey-btn">Begin Your Adventure</a>
+        </div>
+      </div>
+    </div>
+
     <div class="social-sharing">
       <h3>📱 Share This Guide</h3>
       <p>Help others discover these amazing China travel resources!</p>
@@ -480,6 +610,233 @@
         }, 2000);
       });
     }
+
+    // Achievement System Functions
+    function loadAchievements() {
+      const achievementsSection = document.getElementById('achievementsSection');
+      const achievementsContent = document.getElementById('achievementsContent');
+      
+      if (!achievementsSection || !achievementsContent) return;
+
+      // Scan localStorage for checklist data
+      const progress = scanChecklistProgress();
+      
+      if (progress.totalChecked === 0) {
+        // Show the no-progress state (already in HTML)
+        return;
+      }
+
+      // Replace content with achievement display
+      achievementsContent.innerHTML = generateAchievementHTML(progress);
+    }
+
+    function scanChecklistProgress() {
+      const cityPatterns = {
+        'Beijing': { patterns: [/^bj-/, /^forbidden-/, /^temple-/, /^wall-/, /^food-/, /^culture-/], name: 'Beijing', emoji: '🏛️' },
+        'Shanghai': { patterns: [/^sh-/, /^bund-/, /^tower-/, /^garden-/, /^museum-/], name: 'Shanghai', emoji: '🏙️' },
+        'Xian': { patterns: [/^xa-/, /^warriors-/, /^pagoda-/, /^wall-/], name: 'Xi\'an', emoji: '🏺' },
+        'Guangzhou': { patterns: [/^gz-/, /^canton-/], name: 'Guangzhou', emoji: '🌆' },
+        'Chengdu': { patterns: [/^cd-/, /^panda-/], name: 'Chengdu', emoji: '🐼' },
+        'Chongqing': { patterns: [/^cq-/], name: 'Chongqing', emoji: '🏔️' },
+        'Hangzhou': { patterns: [/^hz-/, /^lake-/], name: 'Hangzhou', emoji: '🌸' },
+        'Nanjing': { patterns: [/^nj-/], name: 'Nanjing', emoji: '🏛️' },
+        'Jiaxing': { patterns: [/^jx-/], name: 'Jiaxing', emoji: '🏞️' },
+        'Wuzhen': { patterns: [/^wz-/], name: 'Wuzhen', emoji: '🏮' },
+        'Zhangjiajie': { patterns: [/^zj-/], name: 'Zhangjiajie', emoji: '🏔️' }
+      };
+
+      const jsonChecklists = {
+        'jiaxingChecklist': { name: 'Jiaxing', emoji: '🏞️' },
+        'xianChecklist': { name: 'Xi\'an', emoji: '🏺' },
+        'wuzhenChecklist': { name: 'Wuzhen', emoji: '🏮' }
+      };
+
+      let totalChecked = 0;
+      let totalItems = 0;
+      const cityProgress = {};
+
+      // Scan individual localStorage keys (data-id pattern)
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        const value = localStorage.getItem(key);
+        
+        // Check if it's a data-id style key
+        for (const [cityKey, cityInfo] of Object.entries(cityPatterns)) {
+          for (const pattern of cityInfo.patterns) {
+            if (pattern.test(key)) {
+              if (!cityProgress[cityKey]) {
+                cityProgress[cityKey] = { 
+                  name: cityInfo.name, 
+                  emoji: cityInfo.emoji, 
+                  checked: 0, 
+                  total: 0 
+                };
+              }
+              cityProgress[cityKey].total++;
+              totalItems++;
+              if (value === 'true') {
+                cityProgress[cityKey].checked++;
+                totalChecked++;
+              }
+              break; // Found a match, don't check other patterns for this key
+            }
+          }
+        }
+
+        // Check if it's a JSON checklist
+        if (jsonChecklists[key]) {
+          try {
+            const data = JSON.parse(value);
+            const cityInfo = jsonChecklists[key];
+            const cityKey = cityInfo.name.replace('\'', '');
+            
+            if (!cityProgress[cityKey]) {
+              cityProgress[cityKey] = { 
+                name: cityInfo.name, 
+                emoji: cityInfo.emoji, 
+                checked: 0, 
+                total: 0 
+              };
+            }
+            
+            for (const [itemKey, checked] of Object.entries(data)) {
+              cityProgress[cityKey].total++;
+              totalItems++;
+              if (checked === true) {
+                cityProgress[cityKey].checked++;
+                totalChecked++;
+              }
+            }
+          } catch (e) {
+            console.log('Error parsing JSON checklist:', key, e);
+          }
+        }
+      }
+
+      return {
+        totalChecked,
+        totalItems,
+        cityProgress,
+        overallPercentage: totalItems > 0 ? Math.round((totalChecked / totalItems) * 100) : 0
+      };
+    }
+
+    function generateAchievementHTML(progress) {
+      const { totalChecked, totalItems, cityProgress, overallPercentage } = progress;
+      
+      let html = `
+        <div class="progress-overview">
+          <div class="progress-card active">
+            <h4>🌟 Overall Progress</h4>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: ${overallPercentage}%"></div>
+            </div>
+            <div class="progress-stats">${totalChecked}/${totalItems} completed (${overallPercentage}%)</div>
+          </div>
+        </div>
+      `;
+
+      // City-specific progress
+      if (Object.keys(cityProgress).length > 0) {
+        html += '<div class="progress-overview">';
+        for (const [cityKey, city] of Object.entries(cityProgress)) {
+          const percentage = city.total > 0 ? Math.round((city.checked / city.total) * 100) : 0;
+          const isActive = city.checked > 0 ? 'active' : '';
+          html += `
+            <div class="progress-card ${isActive}">
+              <h4>${city.emoji} ${city.name}</h4>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: ${percentage}%"></div>
+              </div>
+              <div class="progress-stats">${city.checked}/${city.total} completed (${percentage}%)</div>
+            </div>
+          `;
+        }
+        html += '</div>';
+      }
+
+      // Achievement badges
+      const badges = generateAchievementBadges(progress);
+      if (badges.length > 0) {
+        html += '<h4>🎖️ Achievements Unlocked</h4>';
+        html += '<div class="achievements-grid">';
+        html += badges.join('');
+        html += '</div>';
+      }
+
+      return html;
+    }
+
+    function generateAchievementBadges(progress) {
+      const badges = [];
+      const { totalChecked, totalItems, cityProgress, overallPercentage } = progress;
+
+      // First steps achievement
+      if (totalChecked >= 1) {
+        badges.push(`
+          <div class="achievement-badge">
+            <span class="achievement-emoji">🚀</span>
+            First Steps
+          </div>
+        `);
+      }
+
+      // Explorer achievement
+      if (totalChecked >= 5) {
+        badges.push(`
+          <div class="achievement-badge">
+            <span class="achievement-emoji">🗺️</span>
+            Explorer
+          </div>
+        `);
+      }
+
+      // Adventurer achievement
+      if (totalChecked >= 10) {
+        badges.push(`
+          <div class="achievement-badge">
+            <span class="achievement-emoji">🎒</span>
+            Adventurer
+          </div>
+        `);
+      }
+
+      // City Explorer achievement
+      const citiesWithProgress = Object.values(cityProgress).filter(city => city.checked > 0).length;
+      if (citiesWithProgress >= 2) {
+        badges.push(`
+          <div class="achievement-badge">
+            <span class="achievement-emoji">🏙️</span>
+            City Explorer
+          </div>
+        `);
+      }
+
+      // Completionist achievement
+      if (overallPercentage >= 50) {
+        badges.push(`
+          <div class="achievement-badge">
+            <span class="achievement-emoji">⭐</span>
+            Completionist
+          </div>
+        `);
+      }
+
+      // China Expert achievement
+      if (overallPercentage >= 80) {
+        badges.push(`
+          <div class="achievement-badge">
+            <span class="achievement-emoji">🎓</span>
+            China Expert
+          </div>
+        `);
+      }
+
+      return badges;
+    }
+
+    // Load achievements when page loads
+    document.addEventListener('DOMContentLoaded', loadAchievements);
   </script>
 </body>
 </html>
