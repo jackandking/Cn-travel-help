@@ -362,6 +362,64 @@
       margin-bottom: 0.5em;
       display: block;
     }
+    .poster-generation {
+      margin-top: 2em;
+      padding-top: 2em;
+      border-top: 2px solid #e3f2fd;
+    }
+    .generate-poster-btn {
+      background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+      color: white;
+      border: none;
+      padding: 1em 2em;
+      border-radius: 8px;
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 0.5em;
+      box-shadow: 0 4px 8px rgba(255, 107, 107, 0.3);
+    }
+    .generate-poster-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(255, 107, 107, 0.4);
+    }
+    .generate-poster-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    .poster-preview {
+      margin-top: 1em;
+      text-align: center;
+    }
+    .poster-canvas {
+      border: 2px solid #2c5aa0;
+      border-radius: 8px;
+      max-width: 100%;
+      height: auto;
+    }
+    .poster-actions {
+      margin-top: 1em;
+      display: flex;
+      gap: 1em;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .download-poster-btn {
+      background: #28a745;
+      color: white;
+      border: none;
+      padding: 0.8em 1.5em;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .download-poster-btn:hover {
+      background: #1e7e34;
+    }
       });
     }
 
@@ -632,17 +690,17 @@
 
     function scanChecklistProgress() {
       const cityPatterns = {
-        'Beijing': { patterns: [/^bj-/, /^forbidden-/, /^temple-/, /^wall-/, /^food-/, /^culture-/], name: 'Beijing', emoji: '🏛️' },
-        'Shanghai': { patterns: [/^sh-/, /^bund-/, /^tower-/, /^garden-/, /^museum-/], name: 'Shanghai', emoji: '🏙️' },
-        'Xian': { patterns: [/^xa-/, /^warriors-/, /^pagoda-/, /^wall-/], name: 'Xi\'an', emoji: '🏺' },
-        'Guangzhou': { patterns: [/^gz-/, /^canton-/], name: 'Guangzhou', emoji: '🌆' },
-        'Chengdu': { patterns: [/^cd-/, /^panda-/], name: 'Chengdu', emoji: '🐼' },
-        'Chongqing': { patterns: [/^cq-/], name: 'Chongqing', emoji: '🏔️' },
-        'Hangzhou': { patterns: [/^hz-/, /^lake-/], name: 'Hangzhou', emoji: '🌸' },
-        'Nanjing': { patterns: [/^nj-/], name: 'Nanjing', emoji: '🏛️' },
-        'Jiaxing': { patterns: [/^jx-/], name: 'Jiaxing', emoji: '🏞️' },
-        'Wuzhen': { patterns: [/^wz-/], name: 'Wuzhen', emoji: '🏮' },
-        'Zhangjiajie': { patterns: [/^zj-/], name: 'Zhangjiajie', emoji: '🏔️' }
+        'Beijing': { patterns: [/^bj-/, /^forbidden-/, /^temple-/, /^wall-/, /^food-/, /^culture-/, /^kids-forbidden-/, /^kids-temple-/, /^kids-wall-/, /^kids-hutong-/, /^kids-food-/, /^kids-bonus-/], name: 'Beijing', emoji: '🏛️' },
+        'Shanghai': { patterns: [/^sh-/, /^bund-/, /^tower-/, /^garden-/, /^museum-/, /^kids-shanghai-/], name: 'Shanghai', emoji: '🏙️' },
+        'Xian': { patterns: [/^xa-/, /^warriors-/, /^pagoda-/, /^wall-/, /^kids-xian-/], name: 'Xi\'an', emoji: '🏺' },
+        'Guangzhou': { patterns: [/^gz-/, /^canton-/, /^kids-guangzhou-/], name: 'Guangzhou', emoji: '🌆' },
+        'Chengdu': { patterns: [/^cd-/, /^panda-/, /^kids-chengdu-/], name: 'Chengdu', emoji: '🐼' },
+        'Chongqing': { patterns: [/^cq-/, /^kids-chongqing-/], name: 'Chongqing', emoji: '🏔️' },
+        'Hangzhou': { patterns: [/^hz-/, /^lake-/, /^kids-hangzhou-/], name: 'Hangzhou', emoji: '🌸' },
+        'Nanjing': { patterns: [/^nj-/, /^kids-nanjing-/, /^kids-mountain-/, /^kids-river-/, /^kids-temple-/], name: 'Nanjing', emoji: '🏛️' },
+        'Jiaxing': { patterns: [/^jx-/, /^kids-jiaxing-/], name: 'Jiaxing', emoji: '🏞️' },
+        'Wuzhen': { patterns: [/^wz-/, /^kids-wuzhen-/], name: 'Wuzhen', emoji: '🏮' },
+        'Zhangjiajie': { patterns: [/^zj-/, /^kids-zhangjiajie-/, /^kids-mountain-/, /^kids-cable-/, /^kids-forest-/], name: 'Zhangjiajie', emoji: '🏔️' }
       };
 
       const jsonChecklists = {
@@ -764,6 +822,33 @@
         html += '</div>';
       }
 
+      // Poster generation section - only show if user has achievements
+      if (totalChecked > 0) {
+        html += `
+          <div class="poster-generation">
+            <h4>📸 Share Your Journey</h4>
+            <p>Generate a beautiful poster to showcase your China travel achievements!</p>
+            <button class="generate-poster-btn" onclick="generatePoster()">
+              🎨 Create Achievement Poster
+            </button>
+            <div id="posterPreview" class="poster-preview" style="display: none;">
+              <canvas id="posterCanvas" class="poster-canvas" width="800" height="1000"></canvas>
+              <div class="poster-actions">
+                <button class="download-poster-btn" onclick="downloadPoster()">
+                  ⬇️ Download Poster
+                </button>
+                <button class="social-button facebook" onclick="sharePosterOnFacebook()">
+                  📘 Share on Facebook
+                </button>
+                <button class="social-button twitter" onclick="sharePosterOnTwitter()">
+                  🐦 Share on Twitter
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
       return html;
     }
 
@@ -837,6 +922,163 @@
 
     // Load achievements when page loads
     document.addEventListener('DOMContentLoaded', loadAchievements);
+
+    // Poster Generation Functions
+    function generatePoster() {
+      const progress = scanChecklistProgress();
+      const canvas = document.getElementById('posterCanvas');
+      const ctx = canvas.getContext('2d');
+      
+      // Set canvas dimensions for social media sharing (Instagram post size)
+      canvas.width = 800;
+      canvas.height = 1000;
+      
+      // Create gradient background
+      const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+      gradient.addColorStop(0, '#f5f7fa');
+      gradient.addColorStop(0.5, '#c3cfe2');
+      gradient.addColorStop(1, '#667eea');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      // Add decorative elements
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+      ctx.fillRect(0, 0, canvas.width, 50);
+      ctx.fillRect(0, canvas.height - 50, canvas.width, 50);
+      
+      // Title
+      ctx.fillStyle = '#2c5aa0';
+      ctx.font = 'bold 48px Georgia, serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('🇨🇳 China Travel', canvas.width / 2, 100);
+      ctx.fillText('Achievements', canvas.width / 2, 160);
+      
+      // Progress stats
+      let yPos = 240;
+      ctx.fillStyle = '#333';
+      ctx.font = 'bold 32px Georgia, serif';
+      ctx.fillText(`${progress.totalChecked}/${progress.totalItems} Tasks Completed`, canvas.width / 2, yPos);
+      
+      yPos += 50;
+      ctx.font = 'bold 36px Georgia, serif';
+      ctx.fillStyle = '#28a745';
+      ctx.fillText(`${progress.overallPercentage}% Complete!`, canvas.width / 2, yPos);
+      
+      // Progress bar
+      yPos += 80;
+      const barWidth = 600;
+      const barHeight = 30;
+      const barX = (canvas.width - barWidth) / 2;
+      
+      // Background bar
+      ctx.fillStyle = '#e9ecef';
+      ctx.fillRect(barX, yPos, barWidth, barHeight);
+      
+      // Progress bar
+      ctx.fillStyle = '#28a745';
+      ctx.fillRect(barX, yPos, (barWidth * progress.overallPercentage) / 100, barHeight);
+      
+      // Achievement badges
+      yPos += 100;
+      ctx.fillStyle = '#2c5aa0';
+      ctx.font = 'bold 28px Georgia, serif';
+      ctx.fillText('🏆 Achievements Unlocked', canvas.width / 2, yPos);
+      
+      yPos += 60;
+      const badgeTexts = [];
+      if (progress.totalChecked >= 1) badgeTexts.push('🚀 First Steps');
+      if (progress.totalChecked >= 5) badgeTexts.push('🗺️ Explorer');
+      if (progress.totalChecked >= 10) badgeTexts.push('🎒 Adventurer');
+      
+      const citiesWithProgress = Object.values(progress.cityProgress).filter(city => city.checked > 0).length;
+      if (citiesWithProgress >= 2) badgeTexts.push('🏙️ City Explorer');
+      if (progress.overallPercentage >= 50) badgeTexts.push('⭐ Completionist');
+      if (progress.overallPercentage >= 80) badgeTexts.push('🎓 China Expert');
+      
+      if (badgeTexts.length > 0) {
+        ctx.font = 'bold 22px Georgia, serif';
+        ctx.fillStyle = '#f39c12';
+        const badgeSpacing = 40;
+        const startY = yPos;
+        
+        badgeTexts.forEach((badge, index) => {
+          ctx.fillText(badge, canvas.width / 2, startY + (index * badgeSpacing));
+        });
+        
+        yPos = startY + (badgeTexts.length * badgeSpacing) + 40;
+      }
+      
+      // City progress
+      if (Object.keys(progress.cityProgress).length > 0) {
+        ctx.fillStyle = '#2c5aa0';
+        ctx.font = 'bold 24px Georgia, serif';
+        ctx.fillText('🌍 Cities Explored', canvas.width / 2, yPos);
+        
+        yPos += 50;
+        ctx.font = '20px Georgia, serif';
+        ctx.fillStyle = '#333';
+        
+        const citiesWithData = Object.values(progress.cityProgress).filter(city => city.checked > 0);
+        citiesWithData.forEach((city, index) => {
+          const percentage = Math.round((city.checked / city.total) * 100);
+          ctx.fillText(`${city.emoji} ${city.name}: ${percentage}%`, canvas.width / 2, yPos + (index * 35));
+        });
+        
+        yPos += Math.max(citiesWithData.length * 35, 50);
+      }
+      
+      // Website branding
+      yPos = canvas.height - 180;
+      ctx.fillStyle = '#2c5aa0';
+      ctx.font = 'bold 28px Georgia, serif';
+      ctx.fillText('Plan Your Adventure at:', canvas.width / 2, yPos);
+      
+      yPos += 50;
+      ctx.fillStyle = '#ff6b6b';
+      ctx.font = 'bold 32px Georgia, serif';
+      ctx.fillText('cn-travel-help.cn', canvas.width / 2, yPos);
+      
+      yPos += 60;
+      ctx.fillStyle = '#333';
+      ctx.font = 'italic 20px Georgia, serif';
+      ctx.fillText('Making China travel accessible and memorable for everyone', canvas.width / 2, yPos);
+      
+      // Show the poster
+      document.getElementById('posterPreview').style.display = 'block';
+      canvas.scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    function downloadPoster() {
+      const canvas = document.getElementById('posterCanvas');
+      const link = document.createElement('a');
+      link.download = 'china-travel-achievements.png';
+      link.href = canvas.toDataURL();
+      link.click();
+    }
+    
+    function sharePosterOnFacebook() {
+      // Generate poster data URL and share
+      const progress = scanChecklistProgress();
+      const url = encodeURIComponent(window.location.href);
+      const title = encodeURIComponent(`Check out my China travel achievements! ${progress.overallPercentage}% complete with ${progress.totalChecked} tasks done. Plan your own adventure at cn-travel-help.cn`);
+      window.open(
+        `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${title}`,
+        'facebook-share-dialog',
+        'width=626,height=436'
+      );
+    }
+    
+    function sharePosterOnTwitter() {
+      // Share website URL with achievement text
+      const progress = scanChecklistProgress();
+      const url = encodeURIComponent(window.location.href);
+      const text = encodeURIComponent(`🎉 I've completed ${progress.totalChecked} travel tasks in China (${progress.overallPercentage}% progress)! Plan your own adventure with interactive checklists at cn-travel-help.cn 🇨🇳 #ChinaTravel #TravelGoals`);
+      window.open(
+        `https://twitter.com/intent/tweet?url=${url}&text=${text}`,
+        'twitter-share-dialog',
+        'width=550,height=235'
+      );
+    }
   </script>
 </body>
 </html>
